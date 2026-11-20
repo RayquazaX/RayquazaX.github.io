@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qinglong Zheng — Reinforcement Learning for LLM Agents</title>
+<meta name="description" content="Qinglong Zheng studies how LLM agents can learn from their own experience on long, multi-step tasks, during training with reinforcement learning and after it without retraining. Master's degree in Computer Science from UIUC; advised by Prof. Ge Liu.">
+<meta name="author" content="Qinglong Zheng">
+<link rel="canonical" href="https://rayquazax.github.io/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Qinglong Zheng — Reinforcement Learning for LLM Agents">
+<meta property="og:description" content="Qinglong Zheng studies how LLM agents can learn from their own experience on long, multi-step tasks, during training with reinforcement learning and after it without retraining. Master's degree in Computer Science from UIUC; advised by Prof. Ge Liu.">
+<meta property="og:url" content="https://rayquazax.github.io/">
+<meta property="og:image" content="https://rayquazax.github.io/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1d4592">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script>(function(){try{if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500;1,6..72,600&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Qinglong Zheng","url":"https://rayquazax.github.io","description":"Qinglong Zheng studies how LLM agents can learn from their own experience on long, multi-step tasks, during training with reinforcement learning and after it without retraining. Master's degree in Computer Science from UIUC; advised by Prof. Ge Liu.","affiliation":{"@type":"CollegeOrUniversity","name":"University of Illinois Urbana-Champaign"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Illinois Urbana-Champaign"},{"@type":"CollegeOrUniversity","name":"Pennsylvania State University"}],"knowsAbout":["Reinforcement learning","LLM agents","Credit assignment","Reward design","Test-time computation","Vision-language models"],"sameAs":["https://github.com/RayquazaX","https://orcid.org/0009-0001-8882-6952","https://openreview.net/profile?id=~Qinglong_Zheng1"]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol><symbol id="i-code" viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M8 16 16 8M9 8h7v7"/></symbol><symbol id="i-id" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 10.5v6M9 7.5v.2M12.5 16.5v-6h1.5a3 3 0 0 1 0 6z"/></symbol><symbol id="i-review" viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4 3v-3H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="m9 11 2 2 4-4"/></symbol><symbol id="i-cap" viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11.5V16c2 1.6 4 2.4 6 2.4s4-.8 6-2.4v-4.5M22 9v5"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 0 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol><symbol id="i-braces" viewBox="0 0 24 24"><path d="M9 4C7 4 6 5 6 7v2c0 1.5-.8 2.5-2 3 1.2.5 2 1.5 2 3v2c0 2 1 3 3 3M15 4c2 0 3 1 3 3v2c0 1.5.8 2.5 2 3-1.2.5-2 1.5-2 3v2c0 2-1 3-3 3"/></symbol><symbol id="i-news" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h8M8 16h5"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol><symbol id="i-steps" viewBox="0 0 24 24"><path d="M4 19h4v-4h4v-4h4V7h4"/></symbol><symbol id="i-spark" viewBox="0 0 24 24"><path d="M11 4l1.8 5.2L18 11l-5.2 1.8L11 18l-1.8-5.2L4 11l5.2-1.8z"/><path d="M18.5 15.5v4M16.5 17.5h4"/></symbol><symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 16a8 8 0 0 1 16 0"/><path d="M12 16l4-5M4 19h16"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-graph" viewBox="0 0 24 24"><circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="13" cy="17" r="2.5"/><path d="M8.4 6.8l7.2-.6M7.4 9.2l4.4 5.6M16.8 8.2l-2.8 6.6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14"/></symbol><symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5"/></symbol></svg>
+<a class="skip" href="#main">Skip to content</a>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="masthead">
+  <div class="mast-in">
+    <a class="mast-name" href="#top">Qinglong Zheng</a>
+    <nav class="anchors" aria-label="On this page">
+      <div class="anchors-scroll">
+        <a href="#news">News</a><a href="#featured">Featured</a><a href="#publications">Publications</a><a href="#background">Background</a><a href="#contact">Contact</a>
+      </div>
+    </nav>
+    <button class="kbd-btn" type="button" id="cmdk-open" aria-label="Open quick search"><svg class="ico " aria-hidden="true"><use href="#i-search"/></svg><span>⌘K</span></button>
+    <button class="kbd-btn theme-btn" type="button" id="theme-toggle" aria-label="Switch between light and dark theme"><svg class="ico i-moon" aria-hidden="true"><use href="#i-moon"/></svg><svg class="ico i-sun" aria-hidden="true"><use href="#i-sun"/></svg></button>
+  </div>
+</header>
+<div class="page" id="top">
+
+<aside class="sidebar no-photo" aria-label="Profile">
+  <div class="avatar"><svg viewBox="0 0 120 120" role="img" aria-label="Qinglong Zheng"><defs><linearGradient id="av" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b3263"/><stop offset="1" stop-color="#1c5cc0"/></linearGradient></defs><rect width="120" height="120" fill="url(#av)"/><text x="60" y="62" text-anchor="middle" dominant-baseline="central" font-family="Newsreader, Georgia, serif" font-size="46" font-weight="600" fill="#fff">QZ</text></svg></div>
+  <p class="side-name">Qinglong Zheng</p>
+  <ul class="side-links">
+    <li><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg><a class="" href="assets/Qinglong_Zheng_CV.pdf" target="_blank" rel="noopener">CV</a></li>
+    <li><svg class="ico " aria-hidden="true"><use href="#i-mail"/></svg><a class=" js-email" href="#contact" data-u="qzheng19" data-d="illinois.edu">Email</a></li>
+    <li><svg class="ico " aria-hidden="true"><use href="#i-code"/></svg><a class="" href="https://github.com/RayquazaX" target="_blank" rel="noopener">GitHub</a></li>
+    <li><svg class="ico " aria-hidden="true"><use href="#i-review"/></svg><a class="" href="https://openreview.net/profile?id=~Qinglong_Zheng1" target="_blank" rel="noopener">OpenReview</a></li>
+    <li><svg class="ico " aria-hidden="true"><use href="#i-id"/></svg><a class="" href="https://orcid.org/0009-0001-8882-6952" target="_blank" rel="noopener">ORCID</a></li>
+  </ul>
+</aside>
+<main id="main">
+
+<section class="hero" aria-label="Introduction">
+  
+<svg class="hero-art" viewBox="0 0 800 460" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
+  <path class="trail" d="M-10 160 40 120 90 70 150 105 205 48 270 30 340 18 420 26 500 14 575 34 640 22 720 56 770 104 810 150"/>
+  <path class="dead" d="M150 105 124 148 88 166"/>
+  <circle class="halo" cx="90" cy="70" r="9"/><circle class="halo" cx="420" cy="26" r="9"/><circle class="halo" cx="720" cy="56" r="9"/>
+  <circle class="step" cx="40" cy="120" r="3"/><circle class="step" cx="150" cy="105" r="3"/><circle class="step" cx="205" cy="48" r="3"/><circle class="step" cx="270" cy="30" r="3"/><circle class="step" cx="340" cy="18" r="3"/><circle class="step" cx="500" cy="14" r="3"/><circle class="step" cx="575" cy="34" r="3"/><circle class="step" cx="640" cy="22" r="3"/><circle class="step" cx="770" cy="104" r="3"/>
+  <circle class="wasted" cx="124" cy="148" r="3"/><circle class="wasted" cx="88" cy="166" r="3"/>
+  <circle class="key" cx="90" cy="70" r="4.4"/><circle class="key" cx="420" cy="26" r="4.4"/><circle class="key" cx="720" cy="56" r="4.4"/>
+  <circle class="dust" cx="250" cy="96" r="1.3"/><circle class="dust" cx="612" cy="96" r="1.3"/><circle class="dust" cx="690" cy="168" r="1.3"/><circle class="dust" cx="36" cy="330" r="1.3"/><circle class="dust" cx="764" cy="300" r="1.3"/><circle class="dust" cx="742" cy="410" r="1.3"/><circle class="dust" cx="58" cy="428" r="1.3"/><circle class="dust" cx="176" cy="196" r="1.3"/><circle class="dust" cx="556" cy="150" r="1.3"/>
+</svg>
+  <h1>Qinglong Zheng</h1>
+  <a class="status-pill" href="#contact">Applying to Ph.D. programs · 2027 intake</a>
+  <ul class="tiles">
+    <li><a class="tile" href="#pub-parl"><svg viewBox="0 0 52 30" aria-hidden="true"><circle cx="9" cy="15" r="5"/><rect x="37" y="10" width="10" height="10" rx="2.5"/><path d="M14 11C20 5 30 5 36 10M32 6l4 4-5 1"/><path class="g" d="M36 20C30 25 20 25 15 20M19 24l-4-4 5-1"/></svg><span>Agentic RL</span></a></li>
+    <li><a class="tile" href="#pub-dmprm"><svg viewBox="0 0 52 30" aria-hidden="true"><path d="M3 15h46" opacity=".4"/><circle class="wf" cx="5" cy="15" r="2.2"/><circle class="wf" cx="12" cy="15" r="2.2"/><circle class="gf" cx="20" cy="15" r="3.6"/><circle class="wf" cx="28" cy="15" r="2.2"/><circle class="wf" cx="35" cy="15" r="2.2"/><circle class="gf" cx="42" cy="15" r="3.6"/><circle class="wf" cx="49" cy="15" r="2.2"/></svg><span>Reward Design</span></a></li>
+    <li><a class="tile" href="#pub-skt"><svg viewBox="0 0 52 30" aria-hidden="true"><rect x="6" y="13" width="26" height="12" rx="2.5"/><path d="M9 9.5h20M12 6h14"/><path class="g" d="M42 10v10M37 15h10"/></svg><span>Self-Improving Agents</span></a></li>
+    <li><a class="tile" href="#pub-loopscout"><svg viewBox="0 0 52 30" aria-hidden="true"><path d="M5 4v22h43" opacity=".55"/><path class="g" d="M6 24C14 10 26 7 47 6"/></svg><span>Test-Time Compute</span></a></li>
+  </ul>
+  <ul class="hero-links narrow-only">
+    <li><a class="hbtn" href="assets/Qinglong_Zheng_CV.pdf" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg>CV</a></li>
+    <li><a class="hbtn js-email" href="#contact" data-u="qzheng19" data-d="illinois.edu"><svg class="ico " aria-hidden="true"><use href="#i-mail"/></svg>Email</a></li>
+    <li><a class="hbtn" href="https://github.com/RayquazaX" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-code"/></svg>GitHub</a></li>
+    <li><a class="hbtn" href="https://openreview.net/profile?id=~Qinglong_Zheng1" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-review"/></svg>OpenReview</a></li>
+    <li><a class="hbtn" href="https://orcid.org/0009-0001-8882-6952" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-id"/></svg>ORCID</a></li>
+  </ul>
+</section>
+
+<section class="bio" aria-label="About">
+  <p>I am a CS master's graduate of the University of Illinois Urbana-Champaign, advised by Prof. Ge Liu. I study how to make LLM agents learn from their own experience on long, multi-step tasks: <strong>during training</strong>, with reinforcement learning that rewards how a task was carried out and not only whether it succeeded (e.g., process rewards), and <strong>after training</strong>, where a frozen model keeps improving without retraining (e.g., a skill library the agent writes from its own trials).</p>
+  
+</section>
+
+<section id="news" aria-labelledby="news-h">
+  <div class="sec-head"><span class="sec-ico"><svg class="ico " aria-hidden="true"><use href="#i-news"/></svg></span><h2 id="news-h">Latest News</h2></div>
+  <ul class="news">
+    <li><time>Nov 2026</time><p>Four new papers: <a href="#pub-loopscout">LoopScout</a> and <a href="#pub-keystone">Keystone</a> on test-time search for diffusion models, <a href="#pub-keel">Keel</a> and <a href="#pub-hinge">HINGE</a> on repairing and editing vision-language models.</p></li>
+    <li><time>Oct 2026</time><p><strong>ProcedureRL</strong> is at COLM 2026 in San Francisco (Oct 6–9), Poster Session 1. <a href="https://www.jiajunfan.com/projects/procedure-aware-rl/" target="_blank" rel="noopener">Project page</a> · <a href="https://openreview.net/forum?id=d4wrBuJ4xo" target="_blank" rel="noopener">Paper</a></p></li>
+    <li><time>Oct 2026</time><p>New paper, <a href="#pub-dmprm">DM-PRM</a>: per-step credit for agent RL without a learned critic.</p></li>
+    <li><time>Oct 2026</time><p><strong>SELF-POT</strong> is on arXiv: a budget-controlled look at how much a language model gains from test-time computation, with every model call charged in dollars. <a href="https://arxiv.org/abs/2610.01110" target="_blank" rel="noopener">Paper</a></p></li>
+    <li><time>Sep 2026</time><p>Three submissions out: <a href="#pub-skt">SKT</a> on training-free agent skills, <a href="#pub-starvl">STaR-VL</a> on visual-temporal memory for VLMs, and <a href="#pub-mii">MII</a>, a test of whether neural predictors actually use physical information.</p></li>
+    <li><time>Sep 2026</time><p>Published a verdict-first survey on <strong>speculative decoding for RL rollouts</strong>: what holds, what doesn't, and why. <a href="https://github.com/RayquazaX/awesome-speculative-decoding-with-RL" target="_blank" rel="noopener">GitHub</a></p></li>
+    <li><time>Jul 2026</time><p><strong>ProcedureRL</strong> accepted at COLM 2026.</p></li>
+    <li><time>Jul 2026</time><p>Released <strong>claude-unknowns</strong>, a Claude Code plugin that hunts down what a prompt or spec left unsaid before any code is written. <a href="https://github.com/RayquazaX/claude-unknowns" target="_blank" rel="noopener">GitHub</a></p></li>
+    <li><time>May 2026</time><p><strong>PyRAG</strong> is on arXiv: multi-hop RAG reformulated as writing and executing a Python program. <a href="https://arxiv.org/abs/2605.12975" target="_blank" rel="noopener">Paper</a> · <a href="https://github.com/GasolSun36/PyRAG" target="_blank" rel="noopener">Code</a></p></li>
+  </ul>
+  
+</section>
+
+<section id="featured" aria-labelledby="featured-h">
+  <div class="sec-head"><span class="sec-ico"><svg class="ico " aria-hidden="true"><use href="#i-star"/></svg></span><h2 id="featured-h">Featured Research</h2></div>
+  <div class="cards">
+    <a class="card" href="#pub-parl">
+      <svg class="card-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ProcedureRL">
+    <ellipse class="a" cx="118" cy="74" rx="128" ry="62"/><ellipse class="b" cx="322" cy="84" rx="92" ry="54"/>
+    <text class="lbl" x="56" y="26">CORRECT CALLS, WRONG ORDER</text>
+    <path class="ln-dim" d="M83 50h44M153 50h44M223 50h44M293 50h30"/>
+    <circle class="node-dim" cx="70" cy="50" r="13"/><text class="num dim" x="70" y="50">1</text><circle class="node-dim" cx="140" cy="50" r="13"/><text class="num dim" x="140" y="50">3</text><circle class="node-dim" cx="210" cy="50" r="13"/><text class="num dim" x="210" y="50">2</text><circle class="node-dim" cx="280" cy="50" r="13"/><text class="num dim" x="280" y="50">4</text>
+    <circle class="node-dim" cx="340" cy="50" r="12"/><path class="ln-dim" d="M335 45l10 10M345 45l-10 10"/>
+    <text class="lbl" x="56" y="88">SAME CALLS, RIGHT ORDER</text>
+    <path class="ln" d="M83 112h44M153 112h44M223 112h44M293 112h30"/>
+    <circle class="node" cx="70" cy="112" r="13"/><text class="num" x="70" y="112">1</text><circle class="node" cx="140" cy="112" r="13"/><text class="num" x="140" y="112">2</text><circle class="node" cx="210" cy="112" r="13"/><text class="num" x="210" y="112">3</text><circle class="node" cx="280" cy="112" r="13"/><text class="num" x="280" y="112">4</text>
+    <circle class="hot" cx="340" cy="112" r="13"/><path d="M335 113l3.5 3.5 6.5-7.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="card-body">
+        <h3>ProcedureRL: Rewarding <em>How</em> Tools Are Called</h3>
+        <p>Correct calls in the wrong order still fail. A procedural reward scores the order of the call chain, and a 3B model learns to sequence its tools.</p>
+      </div>
+    </a>
+    <a class="card" href="#pub-dmprm">
+      <svg class="card-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="DM-PRM">
+    <ellipse class="a" cx="132" cy="84" rx="128" ry="58"/><ellipse class="b" cx="326" cy="72" rx="68" ry="50"/>
+    <text class="lbl" x="48" y="28">ONE OUTCOME → CREDIT PER STEP</text>
+    <path class="ln-dim" d="M44 122h216"/>
+    <rect class="solid-dim" x="52" y="110" width="14" height="12" rx="2.5"/><rect class="hot" x="78" y="82" width="14" height="40" rx="2.5"/><rect class="solid-dim" x="104" y="113" width="14" height="9" rx="2.5"/><rect class="solid-dim" x="130" y="111" width="14" height="11" rx="2.5"/><rect class="hot" x="156" y="64" width="14" height="58" rx="2.5"/><rect class="solid-dim" x="182" y="108" width="14" height="14" rx="2.5"/><rect class="solid-dim" x="208" y="113" width="14" height="9" rx="2.5"/><rect class="hot" x="234" y="75" width="14" height="47" rx="2.5"/>
+    <path class="ln" d="M266 76h20M286 76l-6-4M286 76l-6 4"/>
+    <rect class="paper" x="292" y="42" width="78" height="66" rx="8"/>
+    <path class="ln-dim stub" d="M304 62h52M304 78h38M304 92h38"/>
+    <text x="303" y="62">progress?</text>
+    <text class="dim" x="303" y="80">yes  0.86</text>
+    <text class="dim" x="303" y="95">no   0.14</text></svg>
+      <div class="card-body">
+        <h3>DM-PRM: Step Credit Can Be Asked For</h3>
+        <p>One yes/no question per step to a general decision model gives every action its own credit, with nothing trained besides the policy.</p>
+      </div>
+    </a>
+    <a class="card" href="#pub-skt">
+      <svg class="card-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="SKT">
+    <ellipse class="a" cx="118" cy="76" rx="118" ry="60"/><ellipse class="b" cx="312" cy="74" rx="84" ry="54"/>
+    <rect class="paper" x="66" y="30" width="92" height="62" rx="6" opacity=".55"/>
+    <rect class="paper" x="59" y="37" width="92" height="62" rx="6" opacity=".8"/>
+    <rect class="paper" x="52" y="44" width="92" height="62" rx="6"/>
+    <text x="62" y="62">SKILL.md</text>
+    <path class="ln-dim" d="M62 74h62M62 84h72M62 94h46"/>
+    <path class="ln" d="M178 62a26 26 0 0 1 44 0M222 62l-0.4-8M222 62l-7.1-3.7"/>
+    <path class="hot-ln" d="M222 90a26 26 0 0 1-44 0M178 90l0.4 8M178 90l7.1 3.7"/>
+    <rect class="paper" x="262" y="34" width="98" height="84" rx="8"/>
+    <path class="ln" d="M275 55l4 4 7-8M275 76l4 4 7-8"/>
+    <path class="ln-dim" d="M296 55h50M296 76h42"/>
+    <circle class="hot" cx="280" cy="98" r="5"/><path class="hot-ln" d="M296 98h36"/></svg>
+      <div class="card-body">
+        <h3>SKT: A Skill Library That Writes Itself</h3>
+        <p>A frozen agent writes skills after successes, appends anti-patterns after failures, and distills recurring failure causes into new skills.</p>
+      </div>
+    </a>
+    <a class="card" href="#pub-loopscout">
+      <svg class="card-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="LoopScout">
+    <ellipse class="a" cx="122" cy="82" rx="124" ry="58"/><ellipse class="b" cx="308" cy="88" rx="96" ry="50"/>
+    <text class="lbl" x="52" y="58">EARLY · 4 LOOPS</text>
+    <text class="lbl" x="232" y="84">LATE · 1 LOOP</text>
+    <path class="ln-dim" d="M44 116h318"/>
+    <path class="ln" stroke-width="1.6" d="M61 110a5 5 0 1 1 10 0"/><path class="ln" stroke-width="1.6" d="M57 110a9 9 0 1 1 18 0"/><path class="ln" stroke-width="1.6" d="M53 110a13 13 0 1 1 26 0"/><path class="ln" stroke-width="1.6" d="M49 110a17 17 0 1 1 34 0"/><circle class="solid" cx="66" cy="116" r="3.6"/><path class="ln" stroke-width="1.6" d="M101 110a5 5 0 1 1 10 0"/><path class="ln" stroke-width="1.6" d="M97 110a9 9 0 1 1 18 0"/><path class="ln" stroke-width="1.6" d="M93 110a13 13 0 1 1 26 0"/><path class="ln" stroke-width="1.6" d="M89 110a17 17 0 1 1 34 0"/><circle class="solid" cx="106" cy="116" r="3.6"/><path class="ln" stroke-width="1.6" d="M141 110a5 5 0 1 1 10 0"/><path class="ln" stroke-width="1.6" d="M137 110a9 9 0 1 1 18 0"/><path class="ln" stroke-width="1.6" d="M133 110a13 13 0 1 1 26 0"/><path class="ln" stroke-width="1.6" d="M129 110a17 17 0 1 1 34 0"/><circle class="solid" cx="146" cy="116" r="3.6"/><path class="ln" stroke-width="1.6" d="M181 110a5 5 0 1 1 10 0"/><path class="ln" stroke-width="1.6" d="M177 110a9 9 0 1 1 18 0"/><path class="ln" stroke-width="1.6" d="M173 110a13 13 0 1 1 26 0"/><path class="ln" stroke-width="1.6" d="M169 110a17 17 0 1 1 34 0"/><circle class="solid" cx="186" cy="116" r="3.6"/>
+    <path class="ln-dim" stroke-width="1.6" d="M234 110a6 6 0 1 1 12 0"/><circle class="solid-dim" cx="240" cy="116" r="3.6"/><path class="ln-dim" stroke-width="1.6" d="M266 110a6 6 0 1 1 12 0"/><circle class="solid-dim" cx="272" cy="116" r="3.6"/><path class="ln-dim" stroke-width="1.6" d="M298 110a6 6 0 1 1 12 0"/><circle class="solid-dim" cx="304" cy="116" r="3.6"/><path class="ln-dim" stroke-width="1.6" d="M330 110a6 6 0 1 1 12 0"/><circle class="solid-dim" cx="336" cy="116" r="3.6"/>
+    <path class="hot-ln dash" d="M213 30v96"/><circle class="hot" cx="213" cy="116" r="5.5"/>
+    <text class="lbl" x="213" y="24" text-anchor="middle">SWITCH</text></svg>
+      <div class="card-body">
+        <h3>LoopScout: Where Do Loops Actually Help?</h3>
+        <p>In looped diffusion transformers, depth matters early and then stops mattering. Spend the loops there, and spend the savings on more candidates.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section id="publications" aria-labelledby="publications-h">
+  <div class="sec-head"><span class="sec-ico"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg></span><h2 id="publications-h">Publications</h2></div>
+  <p class="sec-note">A paper with no venue shown is under review; its manuscript is available <a class="js-email" href="#contact" data-u="qzheng19" data-d="illinois.edu">on request</a>.</p>
+  <div class="pub-tools">
+    <label class="search"><svg class="ico " aria-hidden="true"><use href="#i-search"/></svg><span class="sr-only">Search publications</span><input type="search" id="pub-search" placeholder="Search papers" autocomplete="off"></label>
+  </div>
+  <div id="pub-list">
+    <div class="pub-group" data-area="credit">
+      <h3 class="pub-group-h" id="group-credit">Reward Design for Reinforcement Learning</h3>
+      <article class="pub" id="pub-parl" data-area="credit" data-text="procedure-aware reinforcement learning for tool-augmented large language models procedurerl colm 2026 a procedure-aware reward built on ndcg and suffix-based sequence matching. it rewards valid tool-invocation order while leaving room for exploratory prefixes, on top of kl-regularized grpo. reward design for reinforcement learning qinglong zheng* jiajun fan* chaoran cheng ge liu">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ProcedureRL">
+    <ellipse class="a" cx="118" cy="74" rx="128" ry="62"/><ellipse class="b" cx="322" cy="84" rx="92" ry="54"/>
+    <text class="lbl" x="56" y="26">CORRECT CALLS, WRONG ORDER</text>
+    <path class="ln-dim" d="M83 50h44M153 50h44M223 50h44M293 50h30"/>
+    <circle class="node-dim" cx="70" cy="50" r="13"/><text class="num dim" x="70" y="50">1</text><circle class="node-dim" cx="140" cy="50" r="13"/><text class="num dim" x="140" y="50">3</text><circle class="node-dim" cx="210" cy="50" r="13"/><text class="num dim" x="210" y="50">2</text><circle class="node-dim" cx="280" cy="50" r="13"/><text class="num dim" x="280" y="50">4</text>
+    <circle class="node-dim" cx="340" cy="50" r="12"/><path class="ln-dim" d="M335 45l10 10M345 45l-10 10"/>
+    <text class="lbl" x="56" y="88">SAME CALLS, RIGHT ORDER</text>
+    <path class="ln" d="M83 112h44M153 112h44M223 112h44M293 112h30"/>
+    <circle class="node" cx="70" cy="112" r="13"/><text class="num" x="70" y="112">1</text><circle class="node" cx="140" cy="112" r="13"/><text class="num" x="140" y="112">2</text><circle class="node" cx="210" cy="112" r="13"/><text class="num" x="210" y="112">3</text><circle class="node" cx="280" cy="112" r="13"/><text class="num" x="280" y="112">4</text>
+    <circle class="hot" cx="340" cy="112" r="13"/><path d="M335 113l3.5 3.5 6.5-7.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="pub-body">
+        <div class="pub-meta"><span class="badge k-conference">COLM 2026</span></div>
+        <h4 class="pub-title"><span class="pub-n">1</span><a href="https://openreview.net/forum?id=d4wrBuJ4xo" target="_blank" rel="noopener">Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models</a></h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-parl">▾ Abstract</button>
+        <div class="pub-abs" id="abs-parl" hidden>Training tool-augmented large language models has evolved from supervised fine-tuning (SFT) to reinforcement learning with verifiable rewards (RLVR). Yet existing methods rarely examine whether intermediate execution logic—specifically, the procedural fidelity of multi-turn tool invocations—requires explicit supervision. We hypothesize that enforcing sequential validity at the turn level is a prerequisite for robust multi-turn task completion. To this end, we introduce a Procedure-Aware Reinforcement Learning Framework that explicitly evaluates procedural validity through both invocation chain quality and final system state correctness. Using Group Relative Policy Optimization (GRPO) with KL regularization to fine-tune Qwen2.5-3B-Instruct, we demonstrate on API-Bank, Bamboogle, and BFCL-V3 that our approach consistently outperforms correctness-only baselines. Despite operating at a substantially smaller scale, our 3B model achieves average accuracy competitive with proprietary models such as GPT-5-mini, GPT-4.1-mini, Claude-Haiku-4.5, and Gemini-2.5-Flash-Lite, whose scores are obtained under BFCL’s official per-model evaluation protocols. Qualitative analysis reveals that optimizing tool sequencing yields emergent benefits, simultaneously enhancing multi-turn performance and error recovery from failed tool calls.</div>
+        <p class="pub-authors"><span class="me">Qinglong Zheng*</span>, Jiajun Fan*, Chaoran Cheng, Ge Liu <span class="note">(* equal contribution)</span></p>
+        <p class="pub-desc">A procedure-aware reward built on NDCG and suffix-based sequence matching. It rewards valid tool-invocation order while leaving room for exploratory prefixes, on top of KL-regularized GRPO.</p>
+        
+        <div class="metric">65.67% on BFCL-V3 with a 3B model (ToolRL: 63.07%) · multi-turn 3.88% → 7.25%</div>
+        <div class="pub-links"><a class="plink" href="https://openreview.net/forum?id=d4wrBuJ4xo" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-review"/></svg>OpenReview</a><a class="plink" href="https://www.jiajunfan.com/projects/procedure-aware-rl/" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-ext"/></svg>Project</a><a class="plink" href="assets/papers/parl.pdf" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-down"/></svg>PDF</a><button class="plink js-bib" type="button" data-bib="@inproceedings{zheng2026procedureaware,
+  title     = {Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models},
+  author    = {Qinglong Zheng and Jiajun Fan and Chaoran Cheng and Ge Liu},
+  booktitle = {Third Conference on Language Modeling},
+  year      = {2026},
+  url       = {https://openreview.net/forum?id=d4wrBuJ4xo}
+}"><svg class="ico " aria-hidden="true"><use href="#i-braces"/></svg><span>BibTeX</span></button></div>
+      </div>
+    </article>
+      <article class="pub" id="pub-dmprm" data-area="credit" data-text="a general decision model is a general process reward model: zero-shot step credit for rl post-training of llm agents dm-prm under review turns a fixed general decision model into a zero-shot process reward model: it scores each action's progress from the complete execution log and its outcome, and the standardized scores are added to grpo's outcome-based advantage. no step labels, no scorer training, no value critic. reward design for reinforcement learning jiajun fan qinglong zheng ziwen wang bangji yang neil he ruihan guo chaoran cheng ge liu">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="DM-PRM">
+    <ellipse class="a" cx="132" cy="84" rx="128" ry="58"/><ellipse class="b" cx="326" cy="72" rx="68" ry="50"/>
+    <text class="lbl" x="48" y="28">ONE OUTCOME → CREDIT PER STEP</text>
+    <path class="ln-dim" d="M44 122h216"/>
+    <rect class="solid-dim" x="52" y="110" width="14" height="12" rx="2.5"/><rect class="hot" x="78" y="82" width="14" height="40" rx="2.5"/><rect class="solid-dim" x="104" y="113" width="14" height="9" rx="2.5"/><rect class="solid-dim" x="130" y="111" width="14" height="11" rx="2.5"/><rect class="hot" x="156" y="64" width="14" height="58" rx="2.5"/><rect class="solid-dim" x="182" y="108" width="14" height="14" rx="2.5"/><rect class="solid-dim" x="208" y="113" width="14" height="9" rx="2.5"/><rect class="hot" x="234" y="75" width="14" height="47" rx="2.5"/>
+    <path class="ln" d="M266 76h20M286 76l-6-4M286 76l-6 4"/>
+    <rect class="paper" x="292" y="42" width="78" height="66" rx="8"/>
+    <path class="ln-dim stub" d="M304 62h52M304 78h38M304 92h38"/>
+    <text x="303" y="62">progress?</text>
+    <text class="dim" x="303" y="80">yes  0.86</text>
+    <text class="dim" x="303" y="95">no   0.14</text></svg></div>
+      <div class="pub-body">
+        
+        <h4 class="pub-title"><span class="pub-n">2</span>A General Decision Model Is a General Process Reward Model: Zero-Shot Step Credit for RL Post-Training of LLM Agents</h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-dmprm">▾ Abstract</button>
+        <div class="pub-abs" id="abs-dmprm" hidden>Reinforcement learning (RL) from verifiable outcomes gives a language agent one reward per episode: every step is credited alike, and nothing is learned when all rollouts fail. Step-level credit usually needs step labels, a learned critic, costly LLM judges or hand-written rules. We introduce DM-PRM, which turns a general decision model – one answering yes/no questions with probabilities – into a general process reward model (PRM), zero-shot: no step labels, no fine-tuning, no critic. DM-PRM asks one question per step and adds the standardised answers to the advantage. It is plug-and-play for any policy-gradient method and general: one model serves household tasks, web shopping and multiple RL methods. With Qwen2.5-1.5B it lifts GRPO by over twenty points on ALFWorld and over ten on WebShop, overtakes GiGPO on ALFWorld and learns in far fewer iterations; it also improves GiGPO and GraphGPO on both benchmarks and reaches the highest success of our comparison, ahead of critic-based PPO and of state-of-the-art GiGPO, HGPO and GraphGPO. Its scores locate the useful steps of failed rollouts, and trained agents drop idle actions and explore instead of circling. DM-PRM shows that step credit need not be learned: it can be asked for.</div>
+        <p class="pub-authors">Jiajun Fan, <span class="me">Qinglong Zheng</span>, Ziwen Wang, Bangji Yang, Neil He, Ruihan Guo, Chaoran Cheng, Ge Liu</p>
+        <p class="pub-desc">Turns a fixed general decision model into a zero-shot process reward model: it scores each action's progress from the complete execution log and its outcome, and the standardized scores are added to GRPO's outcome-based advantage. No step labels, no scorer training, no value critic.</p>
+        
+        <div class="metric">Lifts GRPO by over 20 points on ALFWorld and over 10 on WebShop with Qwen2.5-1.5B-Instruct</div>
+        
+      </div>
+    </article>
+      <article class="pub" id="pub-starvl" data-area="credit" data-text="star-vl: capability-aligned reinforcement learning for visual-temporal memory star-vl under review a staged post-training framework that pairs supervised fine-tuning with capability-aligned reinforcement learning, teaching a vision-language model perceptual grounding and visual-temporal memory. reward design for reinforcement learning chih-ting liao zhikai pan qinglong zheng xin cao">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="STaR-VL">
+    <ellipse class="a" cx="140" cy="76" rx="132" ry="58"/><ellipse class="b" cx="330" cy="76" rx="62" ry="54"/>
+    <rect class="paper" x="40" y="36" width="50" height="40" rx="5"/><circle class="solid" cx="54" cy="62" r="5.5"/><rect class="solid-dim" x="72" y="46" width="9" height="9" rx="2"/><rect class="paper" x="100" y="36" width="50" height="40" rx="5"/><circle class="solid" cx="120" cy="58" r="5.5"/><rect class="solid-dim" x="134" y="48" width="9" height="9" rx="2"/><rect class="paper" x="160" y="36" width="50" height="40" rx="5"/><circle class="solid" cx="190" cy="50" r="5.5"/><rect class="hot" x="172" y="60" width="9" height="9" rx="2"/>
+    <path class="ln-dim" d="M40 94h168M208 94l-6-4M208 94l-6 4"/>
+    <text class="lbl" x="40" y="114">FRAMES OVER TIME</text>
+    <path class="ln" d="M226 56h52M278 56l-6-4M278 56l-6 4"/>
+    <rect class="paper" x="288" y="30" width="84" height="72" rx="6"/>
+    <path class="ln-dim" stroke-width="1.2" d="M288 54h84M288 78h84M316 30v72M344 30v72"/>
+    <rect class="hot" x="318" y="56" width="24" height="20" rx="2"/>
+    <text class="lbl" x="330" y="122" text-anchor="middle">MEMORY</text></svg></div>
+      <div class="pub-body">
+        
+        <h4 class="pub-title"><span class="pub-n">3</span>STaR-VL: Capability-Aligned Reinforcement Learning for Visual-Temporal Memory</h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-starvl">▾ Abstract</button>
+        <div class="pub-abs" id="abs-starvl" hidden>Vision-language models can recognize objects in individual images yet struggle to retain and compare observations across a changing scene. We present STaR-VL, a staged post-training framework for visual-temporal memory on a frozen Qwen2.5-VL backbone. Three LoRA adapters learn per-frame perception, symbolic temporal memory through a recurrent memory module, and transfer to visual histories, respectively; each stage combines supervised fine-tuning with a capability-aligned reinforcement-learning reward. Our contributions are a capability-aligned training framework and a controlled evaluation separating its gains from in-domain joint training, persistent-memory augmentation, and inference-time prompting. On SpaMEM, STaR-VL-3B reaches a V-score of 47.60, compared with 21.85 for the untrained backbone, 40.80 for a joint rank-48 LoRA, and 38.90 for an adapted ReMEmbR system on the same backbone. A structured memory-table prompt raises the untrained model to 22.21. The same trained checkpoints transfer to held-out benchmarks: the 7B model improves VSI-Bench from 33.3 to 46.4, with smaller gains on EgoSchema and TempCompass. Visual-history and symbolic-history controls reveal complementary effects of frame coverage and accessible scene state. These results support staged capability-aligned training for object recall, event detection, and cumulative memory over explicitly ordered observations, while identifying fine-grained grounding and temporal localization as remaining challenges.</div>
+        <p class="pub-authors">Chih-Ting Liao, Zhikai Pan, <span class="me">Qinglong Zheng</span>, Xin Cao</p>
+        <p class="pub-desc">A staged post-training framework that pairs supervised fine-tuning with capability-aligned reinforcement learning, teaching a vision-language model perceptual grounding and visual-temporal memory.</p>
+        
+        <div class="metric">47.60 SpaMEM V-score with Qwen2.5-VL-3B · 7B VSI-Bench 33.3 → 46.4 without additional training</div>
+        
+      </div>
+    </article>
+      <article class="pub" id="pub-tactful" data-area="credit" data-text="when to ask, when to act: persona-conditioned clarification for multi-turn human-llm collaboration tactfulllm under review a training framework that makes the choice between asking a clarifying question and acting an explicit learning target. the policy conditions on task uncertainty and on who the user is, and is trained by preference learning over simulated multi-turn dialogues. reward design for reinforcement learning shanghao li haojian li jinda han yibo wang henry peng zou liuchuan yu yuanjie zhu zihe song yaozu wu wei-chieh huang weizhi zhang langzhou he jie yang qinglong zheng mengyao guo philip s. yu">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="TactfulLLM">
+    <ellipse class="a" cx="118" cy="78" rx="122" ry="60"/><ellipse class="b" cx="312" cy="76" rx="86" ry="58"/>
+    <text class="lbl" x="44" y="36">TASK WITH A GAP</text>
+    <rect class="paper" x="44" y="46" width="106" height="60" rx="8"/>
+    <path class="ln-dim" d="M58 64h70M58 78h30M58 92h52"/>
+    <path class="hot-ln dash" d="M98 78h38"/>
+    <path class="ln-dim" d="M150 76h22"/>
+    <circle class="solid" cx="178" cy="76" r="6"/>
+    <path class="ln" d="M184 72C204 62 206 44 228 44M228 44l-7-4M228 44l-7 4"/>
+    <path class="hot-ln" d="M184 80C204 90 206 110 228 110M228 110l-7-4M228 110l-7 4"/>
+    <rect class="paper" x="236" y="26" width="54" height="36" rx="10"/>
+    <path class="ln" d="M257.5 40a5.5 5.5 0 1 1 8.6 4.6c-1.9 1.2-3.1 2.2-3.1 4.4M263 54v.4"/>
+    <text class="lbl" x="300" y="48">PATIENT · ASK</text>
+    <rect class="paper" x="236" y="92" width="54" height="36" rx="6"/>
+    <path class="ln-dim" d="M246 104h22M252 112h26M246 120h16"/>
+    <circle class="hot" cx="290" cy="92" r="9"/><path d="M285 93l3.5 3.5 6.5-7.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text class="lbl" x="304" y="114">BUSY · ACT</text></svg></div>
+      <div class="pub-body">
+        
+        <h4 class="pub-title"><span class="pub-n">4</span>When to Ask, When to Act: Persona-Conditioned Clarification for Multi-Turn Human-LLM Collaboration</h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-tactful">▾ Abstract</button>
+        <div class="pub-abs" id="abs-tactful" hidden>An LLM that asks too many clarifying questions interrupts the user; one that asks too few makes incorrect assumptions. Each clarification therefore requires deciding whether the value of resolving uncertainty outweighs the cost of interrupting the user, and the right answer depends on who is being asked. Yet existing methods optimize when to clarify based on task signals alone, leaving this user-dependence implicit. We introduce TactfulLLM, a lightweight training framework that makes this user-dependent question of when to ask and when to act an explicit learning target. We formalize this Clarify-or-Execute decision as cost-sensitive information acquisition under partial observability, with the policy conditioning on both task uncertainty and user persona. We optimize this policy via preference learning over simulator-generated multi-turn trajectories, where a turn-level score combining realized task success with the immediate persona-dependent interruption cost serves as a tractable surrogate for a cumulative-cost trajectory objective. On conversational code generation, TactfulLLM recovers nearly half (48%) of the performance gap caused by incomplete task specifications, adapting its behavior across personas: extended dialogue for patient users and direct execution for time-constrained ones. Our findings highlight complementary empirical roles for user persona and task uncertainty in learned clarification policies: persona information primarily shapes interaction length, while uncertainty information improves downstream task success. This provides a controlled analysis of persona-adaptive interaction behavior under simulated user-response dynamics.</div>
+        <p class="pub-authors">Shanghao Li, Haojian Li, Jinda Han, Yibo Wang, Henry Peng Zou, Liuchuan Yu, Yuanjie Zhu, Zihe Song, Yaozu Wu, Wei-Chieh Huang, Weizhi Zhang, Langzhou He, Jie Yang, <span class="me">Qinglong Zheng</span>, Mengyao Guo, Philip S. Yu</p>
+        <p class="pub-desc">A training framework that makes the choice between asking a clarifying question and acting an explicit learning target. The policy conditions on task uncertainty and on who the user is, and is trained by preference learning over simulated multi-turn dialogues.</p>
+        
+        <div class="metric">Closes 48% of the pass@1 gap caused by incomplete task specifications in conversational code generation</div>
+        
+      </div>
+    </article>
+    </div>
+    <div class="pub-group" data-area="testtime">
+      <h3 class="pub-group-h" id="group-testtime">Training-Free Improvement at Test Time</h3>
+      <article class="pub" id="pub-skt" data-area="testtime" data-text="skt: self-evolving agent skill library with plan-driven test-time self-correction skt under review a training-free framework in which a frozen agent creates, refines and distills natural-language skills from its own trials, while a separate verifier issues plan-driven corrections that are executed as environment actions. training-free improvement at test time qinglong zheng jiajun fan jiashuo sun bangji yang ge liu">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="SKT">
+    <ellipse class="a" cx="118" cy="76" rx="118" ry="60"/><ellipse class="b" cx="312" cy="74" rx="84" ry="54"/>
+    <rect class="paper" x="66" y="30" width="92" height="62" rx="6" opacity=".55"/>
+    <rect class="paper" x="59" y="37" width="92" height="62" rx="6" opacity=".8"/>
+    <rect class="paper" x="52" y="44" width="92" height="62" rx="6"/>
+    <text x="62" y="62">SKILL.md</text>
+    <path class="ln-dim" d="M62 74h62M62 84h72M62 94h46"/>
+    <path class="ln" d="M178 62a26 26 0 0 1 44 0M222 62l-0.4-8M222 62l-7.1-3.7"/>
+    <path class="hot-ln" d="M222 90a26 26 0 0 1-44 0M178 90l0.4 8M178 90l7.1 3.7"/>
+    <rect class="paper" x="262" y="34" width="98" height="84" rx="8"/>
+    <path class="ln" d="M275 55l4 4 7-8M275 76l4 4 7-8"/>
+    <path class="ln-dim" d="M296 55h50M296 76h42"/>
+    <circle class="hot" cx="280" cy="98" r="5"/><path class="hot-ln" d="M296 98h36"/></svg></div>
+      <div class="pub-body">
+        
+        <h4 class="pub-title"><span class="pub-n">5</span>SKT: Self-Evolving Agent Skill Library with Plan-Driven Test-Time Self-Correction</h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-skt">▾ Abstract</button>
+        <div class="pub-abs" id="abs-skt" hidden>Long-horizon LLM agents must plan and act over many environment turns, yet adapting them by updating parameters is costly and often impossible behind an API. Inference-time learning from the agent’s own trials is the standard alternative, but memory-based methods mostly store experience as reflections, insights or context-resident rules, code-based skill libraries apply only where actions are code, and step-level verifiers deliver their verdicts through the prompt, a channel that a small frozen policy can attenuate or ignore. To address this, we propose SKT, which evolves a natural-language procedural skill library from the agent’s own successes and failures, consolidates failures across trials into new skills, and seats the same frozen weights in a separate verifier context whose corrections are executed directly as environment actions. The two engines are separable, and we evaluate each against its own controls rather than claiming that either depends on the other. Under a matched evaluation protocol with a frozen Qwen2.5-7B-Instruct, SKT consistently outperforms inference-time baselines on held-out ALFWorld tasks, approaches an RL-fine-tuned reference without any weight update, and ports unchanged to multi-hop QA and, on a commercial API backbone, to WebShop.</div>
+        <p class="pub-authors"><span class="me">Qinglong Zheng</span>, Jiajun Fan, Jiashuo Sun, Bangji Yang, Ge Liu</p>
+        <p class="pub-desc">A training-free framework in which a frozen agent creates, refines and distills natural-language skills from its own trials, while a separate verifier issues plan-driven corrections that are executed as environment actions.</p>
+        
+        <div class="metric">58.96 ± 1.50% on 134 held-out ALFWorld tasks, training-free on Qwen2.5-7B-Instruct</div>
+        
+      </div>
+    </article>
+      <article class="pub" id="pub-loopscout" data-area="testtime" data-text="where do loops help? reallocating test-time compute in looped diffusion transformers loopscout under review extra loops in a frozen looped-dit help only in early denoising and only up to the training loop depth. a front-loaded schedule saves the wasted compute, and loopscout spends it on more candidates that are verified and pruned from their intermediate previews. training-free improvement at test time qinglong zheng jiajun fan chih-ting liao chaoran cheng ruihan guo bangji yang shanghao li jinda han ge liu">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="LoopScout">
+    <ellipse class="a" cx="122" cy="82" rx="124" ry="58"/><ellipse class="b" cx="308" cy="88" rx="96" ry="50"/>
+    <text class="lbl" x="52" y="58">EARLY · 4 LOOPS</text>
+    <text class="lbl" x="232" y="84">LATE · 1 LOOP</text>
+    <path class="ln-dim" d="M44 116h318"/>
+    <path class="ln" stroke-width="1.6" d="M61 110a5 5 0 1 1 10 0"/><path class="ln" stroke-width="1.6" d="M57 110a9 9 0 1 1 18 0"/><path class="ln" stroke-width="1.6" d="M53 110a13 13 0 1 1 26 0"/><path class="ln" stroke-width="1.6" d="M49 110a17 17 0 1 1 34 0"/><circle class="solid" cx="66" cy="116" r="3.6"/><path class="ln" stroke-width="1.6" d="M101 110a5 5 0 1 1 10 0"/><path class="ln" stroke-width="1.6" d="M97 110a9 9 0 1 1 18 0"/><path class="ln" stroke-width="1.6" d="M93 110a13 13 0 1 1 26 0"/><path class="ln" stroke-width="1.6" d="M89 110a17 17 0 1 1 34 0"/><circle class="solid" cx="106" cy="116" r="3.6"/><path class="ln" stroke-width="1.6" d="M141 110a5 5 0 1 1 10 0"/><path class="ln" stroke-width="1.6" d="M137 110a9 9 0 1 1 18 0"/><path class="ln" stroke-width="1.6" d="M133 110a13 13 0 1 1 26 0"/><path class="ln" stroke-width="1.6" d="M129 110a17 17 0 1 1 34 0"/><circle class="solid" cx="146" cy="116" r="3.6"/><path class="ln" stroke-width="1.6" d="M181 110a5 5 0 1 1 10 0"/><path class="ln" stroke-width="1.6" d="M177 110a9 9 0 1 1 18 0"/><path class="ln" stroke-width="1.6" d="M173 110a13 13 0 1 1 26 0"/><path class="ln" stroke-width="1.6" d="M169 110a17 17 0 1 1 34 0"/><circle class="solid" cx="186" cy="116" r="3.6"/>
+    <path class="ln-dim" stroke-width="1.6" d="M234 110a6 6 0 1 1 12 0"/><circle class="solid-dim" cx="240" cy="116" r="3.6"/><path class="ln-dim" stroke-width="1.6" d="M266 110a6 6 0 1 1 12 0"/><circle class="solid-dim" cx="272" cy="116" r="3.6"/><path class="ln-dim" stroke-width="1.6" d="M298 110a6 6 0 1 1 12 0"/><circle class="solid-dim" cx="304" cy="116" r="3.6"/><path class="ln-dim" stroke-width="1.6" d="M330 110a6 6 0 1 1 12 0"/><circle class="solid-dim" cx="336" cy="116" r="3.6"/>
+    <path class="hot-ln dash" d="M213 30v96"/><circle class="hot" cx="213" cy="116" r="5.5"/>
+    <text class="lbl" x="213" y="24" text-anchor="middle">SWITCH</text></svg></div>
+      <div class="pub-body">
+        
+        <h4 class="pub-title"><span class="pub-n">6</span>Where Do Loops Help? Reallocating Test-Time Compute in Looped Diffusion Transformers</h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-loopscout">▾ Abstract</button>
+        <div class="pub-abs" id="abs-loopscout" hidden>Looped diffusion transformers apply shared Transformer blocks repeatedly within each denoising step, so the loop depth can be chosen at inference without changing the parameter count. Current inference uses the same loop depth at every step, adaptive looping needs a trained gating network, and where additional loops actually help remains unclear. We study this question on Looped-DiT and find a simple pattern. Loops improve performance only up to the training loop depth, and only in the early denoising steps, while the layout of the image is being determined. This finding gives two training-free changes to inference. A front-loaded loop schedule applies the full depth early and a single loop afterwards. It cuts inference compute by more than a quarter without degrading performance on T2I-CoReBench, GenEval and DPG-Bench, and matches adaptive looping on T2I-CoReBench. We propose LoopScout, which reallocates the saved compute to additional candidates, scores their intermediate clean-image predictions at the switch step with a zero-shot checklist verifier, and completes only the best one. Under matched inference compute it consistently outperforms best-of-N sampling, and on the public B/16 checkpoint it matches best-of-4 with less than half of its inference compute.</div>
+        <p class="pub-authors"><span class="me">Qinglong Zheng</span>, Jiajun Fan, Chih-Ting Liao, Chaoran Cheng, Ruihan Guo, Bangji Yang, Shanghao Li, Jinda Han, Ge Liu</p>
+        <p class="pub-desc">Extra loops in a frozen Looped-DiT help only in early denoising and only up to the training loop depth. A front-loaded schedule saves the wasted compute, and LoopScout spends it on more candidates that are verified and pruned from their intermediate previews.</p>
+        
+        <div class="metric">28% less generator compute at no quality loss · 91.6 GenEval vs 90.6 for best-of-4 at 48% of its compute</div>
+        
+      </div>
+    </article>
+      <article class="pub" id="pub-pyrag" data-area="testtime" data-text="retrieval is cheap, show me the code: executable multi-hop reasoning for retrieval-augmented generation pyrag arxiv 2026 an executable python framework for multi-hop retrieval reasoning: the reasoning trace is a program over retrieval and qa tools, runtime exceptions drive self-repair, and retrieval expands when the evidence is insufficient. training-free improvement at test time jiashuo sun* jimeng shi* yixuan xie saizhuo wang jash rajesh parekh pengcheng jiang zhiyi shi jiajun fan qinglong zheng peiran li shaowen wang ge liu jiawei han">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="PyRAG">
+    <ellipse class="a" cx="140" cy="78" rx="128" ry="60"/><ellipse class="b" cx="326" cy="74" rx="66" ry="52"/>
+    <rect class="paper" x="38" y="20" width="214" height="112" rx="8"/>
+    <circle class="solid-dim" cx="53" cy="33" r="2.8"/><circle class="solid-dim" cx="63" cy="33" r="2.8"/><circle class="solid-dim" cx="73" cy="33" r="2.8"/>
+    <path class="ln-dim" d="M38 45h214" stroke-width="1"/>
+    <path class="ln-dim stub" d="M52 62h78M52 78h112M52 94h96"/>
+    <text x="52" y="66">x = retrieve(q1)</text>
+    <text x="52" y="82">y = retrieve(f"{x} ...")</text>
+    <text x="52" y="98">ans = answer(q, x, y)</text>
+    <text class="dim" x="52" y="118"># raises → self-repair</text>
+    <rect class="paper" x="294" y="30" width="44" height="54" rx="5"/><path class="ln-dim" d="M303 44h26M303 54h26M303 64h16"/>
+    <rect class="paper" x="320" y="64" width="44" height="54" rx="5"/><path class="ln-dim" d="M329 78h26M329 88h26M329 98h16"/>
+    <path class="ln" d="M256 58h32M288 58l-7-4M288 58l-7 4"/>
+    <path class="hot-ln" d="M314 104h-56M258 104l7-4M258 104l7 4"/></svg></div>
+      <div class="pub-body">
+        <div class="pub-meta"><span class="badge k-preprint">arXiv 2026</span></div>
+        <h4 class="pub-title"><span class="pub-n">7</span><a href="https://arxiv.org/abs/2605.12975" target="_blank" rel="noopener">Retrieval is Cheap, Show Me the Code: Executable Multi-Hop Reasoning for Retrieval-Augmented Generation</a></h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-pyrag">▾ Abstract</button>
+        <div class="pub-abs" id="abs-pyrag" hidden>Retrieval-Augmented Generation (RAG) has become a standard approach for knowledge-intensive question answering, but existing systems remain brittle on multi-hop questions, where solving the task requires chaining multiple retrieval and reasoning steps. Key challenges are that current methods represent reasoning through free-form natural language, where intermediate states are implicit, retrieval queries can drift from intended entities, and errors are detected by the same model that produces them making self-reflection an unreliable, ungrounded signal. We observe that multi-hop question answering is a typical form of step-by-step computation, and that this structured process aligns closely with how code-specialized language models are trained to operate. Motivated by this, we introduce PyRAG, a framework that reformulates multi-hop RAG as program synthesis and execution. Instead of free-form reasoning trajectories, PyRAG represents the reasoning process as an executable Python program over retrieval and QA tools, exposing intermediate states as variables, producing deterministic feedback through execution, and yielding an inspectable trace of the entire reasoning process. This formulation further enables compiler-grounded self-repair and execution-driven adaptive retrieval without any additional training. Experiments on five QA benchmarks (PopQA, HotpotQA, 2WikiMultihopQA, MuSiQue, and Bamboogle) show that PyRAG consistently outperforms strong baselines under both training-free and RL-trained settings, with especially large gains on compositional multi-hop datasets.</div>
+        <p class="pub-authors">Jiashuo Sun*, Jimeng Shi*, Yixuan Xie, Saizhuo Wang, Jash Rajesh Parekh, Pengcheng Jiang, Zhiyi Shi, Jiajun Fan, <span class="me">Qinglong Zheng</span>, Peiran Li, Shaowen Wang, Ge Liu, Jiawei Han <span class="note">(* equal contribution)</span></p>
+        <p class="pub-desc">An executable Python framework for multi-hop retrieval reasoning: the reasoning trace is a program over retrieval and QA tools, runtime exceptions drive self-repair, and retrieval expands when the evidence is insufficient.</p>
+        
+        <div class="metric">PyRAG-RL: 39.3 average exact match across four QA benchmarks, +6.9 over reported Search-R1</div>
+        <div class="pub-links"><a class="plink" href="https://arxiv.org/abs/2605.12975" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg>arXiv</a><a class="plink" href="https://github.com/GasolSun36/PyRAG" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-code"/></svg>Code</a><button class="plink js-bib" type="button" data-bib="@article{sun2026pyrag,
+  title   = {Retrieval is Cheap, Show Me the Code: Executable Multi-Hop Reasoning for Retrieval-Augmented Generation},
+  author  = {Sun, Jiashuo and Shi, Jimeng and Xie, Yixuan and Wang, Saizhuo and Parekh, Jash Rajesh and Jiang, Pengcheng and Shi, Zhiyi and Fan, Jiajun and Zheng, Qinglong and Li, Peiran and Wang, Shaowen and Liu, Ge and Han, Jiawei},
+  journal = {arXiv preprint arXiv:2605.12975},
+  year    = {2026}
+}"><svg class="ico " aria-hidden="true"><use href="#i-braces"/></svg><span>BibTeX</span></button></div>
+      </div>
+    </article>
+      <article class="pub" id="pub-selfpot" data-area="testtime" data-text="how much can language models gain from test-time computation? self-pot arxiv 2026 a budget-controlled evaluation of test-time computation across 350 mathematics, programming, workflow and terminal tasks. controlled pool replays separate candidate coverage from submission accuracy. training-free improvement at test time bangji yang jingyuan li jiajun fan yi evie zhang ruihan guo hongbo ma neil he chumeng liang qinglong zheng zhanghan ni ge liu">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="SELF-POT">
+    <ellipse class="a" cx="136" cy="84" rx="124" ry="56"/><ellipse class="b" cx="312" cy="58" rx="82" ry="46"/>
+    <path class="ln-dim" d="M60 20v102h292"/>
+    <path class="ln-dim dash" d="M60 48h292"/>
+    <text class="lbl" x="70" y="41">STRONGER MODEL, DIRECT</text>
+    <path class="ln-dim" d="M60 116C120 98 200 86 350 80"/>
+    <path class="ln" d="M60 112C110 70 190 44 350 34"/>
+    <circle class="hot" cx="223" cy="48" r="6"/>
+    <path class="ln-dim" d="M100 122v5M170 122v5M250 122v5"/>
+    <text class="lbl" x="100" y="140" text-anchor="middle">1×</text><text class="lbl" x="170" y="140" text-anchor="middle">2×</text><text class="lbl" x="250" y="140" text-anchor="middle">4×</text>
+    <text class="lbl" x="352" y="140" text-anchor="end">BUDGET ($)</text></svg></div>
+      <div class="pub-body">
+        <div class="pub-meta"><span class="badge k-preprint">arXiv 2026</span></div>
+        <h4 class="pub-title"><span class="pub-n">8</span><a href="https://arxiv.org/abs/2610.01110" target="_blank" rel="noopener">How Much Can Language Models Gain from Test-Time Computation?</a></h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-selfpot">▾ Abstract</button>
+        <div class="pub-abs" id="abs-selfpot" hidden>How much can test-time computation improve a language model, and at what cost? Test-time scaling is widely proposed as a substitute for larger models, but existing comparisons mostly evaluate one domain at a time and rarely charge selection to the budget. We introduce SELF-POT, a benchmark and evaluation framework that measures the test-time potential of a model across competition mathematics, competitive programming, and agentic workflows. SELF-POT separates candidate coverage from final accuracy on static tasks, tracks correctness transitions under revision, and measures protocol completion alongside task success in agentic environments. Under a unified budget rule, it compares Direct inference with parallel sampling and self-revision under fixed multiples of the Direct budget, and charges every model call, including selection and critique, in dollars. This design supports two kinds of comparison: the gain a model obtains from additional inference, and a lower-cost model with additional inference against a stronger model. Across five low-cost reasoning models on 350 sealed tasks, with Claude Opus 5.5 Direct as the reference, the returns depend on the domain, the selection rule, and failure handling. When we replay the retained programming candidate pools, public-example selection raises correct submissions from 376 to 453 of 500 scheduled cells while saving 12-49% of logical API cost across models, and simply retaining an available candidate when judging fails recovers 61 submissions at unchanged cost. On identical mathematics pools, judging with fallback yields 186 correct submissions versus 182 for voting, while voting saves 12-21% of logical API cost. These controlled replays show how selection and failure handling change the gains realized from the same generated candidates, and they quantify the marginal value of a model judge.</div>
+        <p class="pub-authors">Bangji Yang, Jingyuan Li, Jiajun Fan, Yi Evie Zhang, Ruihan Guo, Hongbo Ma, Neil He, Chumeng Liang, <span class="me">Qinglong Zheng</span>, Zhanghan Ni, Ge Liu</p>
+        <p class="pub-desc">A budget-controlled evaluation of test-time computation across 350 mathematics, programming, workflow and terminal tasks. Controlled pool replays separate candidate coverage from submission accuracy.</p>
+        
+        <div class="metric">Public-example selection raises correct programming submissions from 376 to 453 of 500</div>
+        <div class="pub-links"><a class="plink" href="https://arxiv.org/abs/2610.01110" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg>arXiv</a><button class="plink js-bib" type="button" data-bib="@article{yang2026selfpot,
+  title   = {How Much Can Language Models Gain from Test-Time Computation?},
+  author  = {Yang, Bangji and Li, Jingyuan and Fan, Jiajun and Zhang, Yi Evie and Guo, Ruihan and Ma, Hongbo and He, Neil and Liang, Chumeng and Zheng, Qinglong and Ni, Zhanghan and Liu, Ge},
+  journal = {arXiv preprint arXiv:2610.01110},
+  year    = {2026}
+}"><svg class="ico " aria-hidden="true"><use href="#i-braces"/></svg><span>BibTeX</span></button></div>
+      </div>
+    </article>
+      <article class="pub" id="pub-keystone" data-area="testtime" data-text="keystone: judging previews at key steps for test-time search in diffusion models keystone under review a training-free verifier that compiles a prompt into typed questions and has an off-the-shelf multimodal decision model judge intermediate clean-image predictions, combined with adaptive search and pruning. training-free improvement at test time jiajun fan chaoran cheng ziwen wang changyi yang bangji yang qinglong zheng ge liu">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Keystone">
+    <ellipse class="a" cx="124" cy="78" rx="124" ry="58"/><ellipse class="b" cx="318" cy="76" rx="80" ry="52"/>
+    <path class="hot-ln dash" d="M165 30v102"/>
+    <text class="lbl" x="165" y="22" text-anchor="middle">KEY STEP</text>
+    <path class="ln-dim" d="M48 48h106"/><circle class="solid-dim" cx="46" cy="48" r="4"/><rect class="node-dim" x="154" y="37" width="22" height="22" rx="4"/><path class="ln-dim" d="M192 43l10 10M202 43l-10 10"/><path class="ln-dim" d="M48 112h106"/><circle class="solid-dim" cx="46" cy="112" r="4"/><rect class="node-dim" x="154" y="101" width="22" height="22" rx="4"/><path class="ln-dim" d="M192 107l10 10M202 107l-10 10"/>
+    <path class="ln" d="M48 80h106M176 80h122M298 80l-7-4M298 80l-7 4"/><circle class="solid" cx="46" cy="80" r="4"/>
+    <rect class="node" x="154" y="69" width="22" height="22" rx="4"/>
+    <rect class="paper" x="306" y="58" width="44" height="44" rx="6"/>
+    <circle class="solid" cx="320" cy="74" r="5.5"/><rect class="solid-dim" x="330" y="82" width="11" height="11" rx="2"/>
+    <circle class="hot" cx="354" cy="56" r="10"/><path d="M349 57l3.5 3.5 6.5-7.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="pub-body">
+        
+        <h4 class="pub-title"><span class="pub-n">9</span>Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models</h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-keystone">▾ Abstract</button>
+        <div class="pub-abs" id="abs-keystone" hidden>Text-to-image diffusion and flow models yield a preview, their clean-image estimate, at every denoising step. When they miscount, drop or misplace objects, test-time search is in a bind: its verifiers are reward models built for finished images, so judging early misreads blurry previews, and judging late, as best-of-N does, pays to fully denoise doomed candidates. We find that the image is not the problem: the outcome is settled as denoising starts, by the seed or by a stochastic sampler’s first steps, and already shows in early previews; what fails on them is the judge, as reward models read them near chance on several kinds of prompts. We introduce Keystone, a training-free judge of previews that compiles a prompt into typed questions about its objects, counts, colours and positions and has an off-the-shelf multimodal decision model answer them. Asked this way, the judge reads counts and positions from early previews better than reward models read them from finished images. Searching at these key steps on GenEval with SD3.5-Medium, Keystone’s adaptive search and pruning significantly outperform best-of-8 with every other verifier at under half its generator compute, and as a drop-in verifier there, the Keystone score significantly improves best-of-N, progressive seed pruning and FK steering; without retuning, both searches stay significantly above the strongest other verifier’s best-of-N on average over four base models and three benchmarks. Keystone thus moves test-time judgment to the key steps where the outcome already shows.</div>
+        <p class="pub-authors">Jiajun Fan, Chaoran Cheng, Ziwen Wang, Changyi Yang, Bangji Yang, <span class="me">Qinglong Zheng</span>, Ge Liu</p>
+        <p class="pub-desc">A training-free verifier that compiles a prompt into typed questions and has an off-the-shelf multimodal decision model judge intermediate clean-image predictions, combined with adaptive search and pruning.</p>
+        
+        <div class="metric">Exceeds best-of-8 with other verifiers at less than half the generator compute (GenEval, SD3.5-Medium)</div>
+        
+      </div>
+    </article>
+    </div>
+    <div class="pub-group" data-area="editing">
+      <h3 class="pub-group-h" id="group-editing">Model Editing &amp; Interpretability</h3>
+      <article class="pub" id="pub-mii" data-area="editing" data-text="what drives the prediction? how neural models rely on physical information mii under review matched invariant interchange tests how energy-correlated hidden units affect the physical quantities in a model's predictions, using matched donor and control-unit interventions. model editing &amp; interpretability chih-ting liao zhikai pan qinglong zheng huqin weng chunlei meng xin cao">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="MII">
+    <ellipse class="a" cx="140" cy="78" rx="128" ry="62"/><ellipse class="b" cx="324" cy="80" rx="68" ry="54"/>
+    <text class="lbl" x="84" y="20" text-anchor="middle">DONOR</text><text class="lbl" x="196" y="20" text-anchor="middle">MODEL</text>
+    <circle class="node-dim" cx="84" cy="38" r="8"/><circle class="node" cx="196" cy="38" r="8"/><circle class="hot" cx="84" cy="60" r="8"/><circle class="node" cx="196" cy="60" r="8" style="stroke:var(--il-hot)"/><circle class="node-dim" cx="84" cy="82" r="8"/><circle class="node" cx="196" cy="82" r="8"/><circle class="node-dim" cx="84" cy="104" r="8"/><circle class="node" cx="196" cy="104" r="8"/><circle class="node-dim" cx="84" cy="126" r="8"/><circle class="node" cx="196" cy="126" r="8"/>
+    <path class="hot-ln" d="M96 60h86M182 60l-7-4M182 60l-7 4"/>
+    <path class="ln-dim dash" d="M96 104h86"/>
+    <path class="ln" d="M212 82h42M254 82l-7-4M254 82l-7 4"/>
+    <path class="ln-dim" d="M284 36v84h80"/>
+    <rect class="hot" x="298" y="56" width="20" height="64" rx="2.5"/><rect class="solid-dim" x="330" y="94" width="20" height="26" rx="2.5"/>
+    <text class="lbl" x="324" y="138" text-anchor="middle">SELECTED VS CONTROL</text></svg></div>
+      <div class="pub-body">
+        
+        <h4 class="pub-title"><span class="pub-n">10</span>What Drives the Prediction? How Neural Models Rely on Physical Information</h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-mii">▾ Abstract</button>
+        <div class="pub-abs" id="abs-mii" hidden>When energy can be decoded from a hidden layer, does the model use that information to predict the next state? Matched Invariant Interchange (MII) tests whether exchanging units correlated with energy makes the predicted energy track a donor’s energy more closely than exchanging equally many control units. We call this difference in correlation selectivity. Our contributions are: i) Calibrated physical transfer. A small selection gap has two interpretations. In residual predictors, even a whole-layer exchange transfers little donor energy. In direct predictors, the whole layer can transfer energy although its most energy-correlated units transfer less than random units. ii) Representation-dependent selectivity. Across three sizes of the Poseidon fluid model, channels selected for kinetic energy outperform random channels in the encoder and penultimate decoder. At the final decoder, whole-layer transfer is nearly complete, yet selected channels transfer less than random ones. iii) Training-dependent physical selectivity. On NS-Sines, supervising Poseidon-B on kinetic energy rather than a fixed random function of the field raises encoder selectivity by 0.066–0.134 across three seeds. Subtracting the control response changes two of three checkpoint choices and lowers mean kinetic-energy error on both test distributions. On NS-Gauss, selecting by validation field error instead yields a more accurate velocity field.</div>
+        <p class="pub-authors">Chih-Ting Liao, Zhikai Pan, <span class="me">Qinglong Zheng</span>, Huqin Weng, Chunlei Meng, Xin Cao</p>
+        <p class="pub-desc">Matched Invariant Interchange tests how energy-correlated hidden units affect the physical quantities in a model's predictions, using matched donor and control-unit interventions.</p>
+        
+        <div class="metric">On NS-Sines, energy supervision raises encoder selectivity by 0.066–0.134 over random-function supervision across three seeds</div>
+        
+      </div>
+    </article>
+      <article class="pub" id="pub-keel" data-area="editing" data-text="keel: a frontier model teaches a vision-language model by rewriting its weights keel under review a frontier multimodal agent diagnoses thinking loops in a small vision-language model, edits its weights, and validates the repair on held-out questions, all without gradient training. model editing &amp; interpretability jiajun fan neil he bangji yang qinglong zheng ziwen wang chaoran cheng changyi yang hanqi mao ge liu">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Keel">
+    <ellipse class="a" cx="132" cy="78" rx="126" ry="62"/><ellipse class="b" cx="322" cy="76" rx="72" ry="52"/>
+    <path class="ln-dim" d="M98 76a22 22 0 1 1-11-19M87 57l-4-6.9M87 57h-8"/>
+    <path class="hot-ln" d="M50 50l52 52"/>
+    <rect class="cell" x="146" y="28" width="16" height="16" rx="3"/><rect class="cell" x="165" y="28" width="16" height="16" rx="3"/><rect class="cell" x="184" y="28" width="16" height="16" rx="3"/><rect class="cell" x="203" y="28" width="16" height="16" rx="3"/><rect class="cell" x="222" y="28" width="16" height="16" rx="3"/><rect class="cell" x="146" y="47" width="16" height="16" rx="3"/><rect class="cell" x="165" y="47" width="16" height="16" rx="3"/><rect class="hot" x="184" y="47" width="16" height="16" rx="3"/><rect class="cell" x="203" y="47" width="16" height="16" rx="3"/><rect class="cell" x="222" y="47" width="16" height="16" rx="3"/><rect class="cell" x="146" y="66" width="16" height="16" rx="3"/><rect class="cell" x="165" y="66" width="16" height="16" rx="3"/><rect class="hot" x="184" y="66" width="16" height="16" rx="3"/><rect class="hot" x="203" y="66" width="16" height="16" rx="3"/><rect class="cell" x="222" y="66" width="16" height="16" rx="3"/><rect class="cell" x="146" y="85" width="16" height="16" rx="3"/><rect class="hot" x="165" y="85" width="16" height="16" rx="3"/><rect class="cell" x="184" y="85" width="16" height="16" rx="3"/><rect class="cell" x="203" y="85" width="16" height="16" rx="3"/><rect class="cell" x="222" y="85" width="16" height="16" rx="3"/><rect class="cell" x="146" y="104" width="16" height="16" rx="3"/><rect class="cell" x="165" y="104" width="16" height="16" rx="3"/><rect class="cell" x="184" y="104" width="16" height="16" rx="3"/><rect class="cell" x="203" y="104" width="16" height="16" rx="3"/><rect class="cell" x="222" y="104" width="16" height="16" rx="3"/>
+    <path class="ln" d="M252 76h40M292 76l-7-4M292 76l-7 4"/>
+    <rect class="paper" x="302" y="50" width="62" height="52" rx="8"/>
+    <path class="ln" d="M314 68h38M314 82h24"/>
+    <circle class="hot" cx="362" cy="50" r="10"/><path d="M357 51l3.5 3.5 6.5-7.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="pub-body">
+        
+        <h4 class="pub-title"><span class="pub-n">11</span>Keel: A Frontier Model Teaches a Vision-Language Model by Rewriting Its Weights</h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-keel">▾ Abstract</button>
+        <div class="pub-abs" id="abs-keel" hidden>Can a frontier model repair a vision-language model (VLM) by rewriting its weights? Small reasoning VLMs such as Qwen3.5 need such a repair: in thinking mode they fall into loops on many image questions, repeating themselves until the token limit, spending the whole budget and losing the answer. The usual remedies act on the decoding, leaving the looping model as it was, or must be told what to change. Yet the cause is written in the weights. Keel, the first agentic weight-editing method for VLMs on image tasks, finds and removes it there. Told only the symptom, an editor, a frontier multimodal LLM acting as an agent, locates the cause, edits the weights and tests them, with a failure census and instruments showing it the failing images and where the VLM attends; among several editors, the harness keeps only edits that clearly reduce the failure without lowering accuracy on questions no editor saw. The repair needs no training, keeps the model’s size and per-token cost, and applies to already-edited weights. The editors expose where the loops live: from the original weights, independent editors on both models trace them to the attention outputs of the middle layers, and the smaller VLM stops consulting the image inside a loop. On Qwen3.5-0.8B and Qwen3.5-2B, across six image benchmarks from visual mathematics to GUI grounding, the edit removes most loops on every benchmark and shortens answers, and the edited models are significantly more accurate than the thinking models on average; the larger one gains most on GUI grounding, a task absent from the practice questions. Because the repair lives in the weights, it combines with budget forcing where held-out questions favor it: on the best available weights, Keel has the best average accuracy on both models, significantly above every training-free baseline we compare on the larger one.</div>
+        <p class="pub-authors">Jiajun Fan, Neil He, Bangji Yang, <span class="me">Qinglong Zheng</span>, Ziwen Wang, Chaoran Cheng, Changyi Yang, Hanqi Mao, Ge Liu</p>
+        <p class="pub-desc">A frontier multimodal agent diagnoses thinking loops in a small vision-language model, edits its weights, and validates the repair on held-out questions, all without gradient training.</p>
+        
+        <div class="metric">Qwen3.5-0.8B and 2B on six visual reasoning and GUI grounding benchmarks: fewer loops, higher average accuracy, same size and per-token cost</div>
+        
+      </div>
+    </article>
+      <article class="pub" id="pub-hinge" data-area="editing" data-text="hinge: from cross-object spillover to selective state editing hinge under review a benchmark that tests requested object-state changes, their consequences, and the preservation of unaffected facts in synthetic scenes and natural photographs, plus swing editor, which learns object-local state vectors with the vlm frozen. model editing &amp; interpretability chih-ting liao yitong qiao qinglong zheng huqin weng fei shen xin cao tat-seng chua">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="HINGE">
+    <ellipse class="a" cx="118" cy="86" rx="120" ry="56"/><ellipse class="b" cx="300" cy="86" rx="92" ry="54"/>
+    <text class="lbl" x="105" y="22" text-anchor="middle">EDIT THIS ONE</text><text class="lbl" x="295" y="22" text-anchor="middle">KEEP THIS ONE</text>
+    <rect class="paper" x="66" y="76" width="78" height="46" rx="4"/>
+    <path class="ln-dim dash" d="M66 76h78"/>
+    <path class="hot-ln" stroke-width="3" d="M66 76 124 42"/>
+    <path class="hot-ln" stroke-width="1.6" d="M144 62a48 48 0 0 0-10-16M134 46l1 8M134 46l7 3"/>
+    <circle class="hot" cx="66" cy="76" r="5"/>
+    <path class="ln-dim dash" d="M160 100h76"/><path class="ln-dim" d="M193 94l10 12M203 94l-10 12"/>
+    <rect class="paper" x="256" y="76" width="78" height="46" rx="4"/>
+    <path class="ln" stroke-width="3" d="M252 76h86"/>
+    <rect class="node" x="287" y="93" width="16" height="13" rx="2.5"/><path class="ln" d="M290 93v-4a5 5 0 0 1 10 0v4"/></svg></div>
+      <div class="pub-body">
+        
+        <h4 class="pub-title"><span class="pub-n">12</span>HINGE: From Cross-Object Spillover to Selective State Editing</h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-hinge">▾ Abstract</button>
+        <div class="pub-abs" id="abs-hinge" hidden>Vision–language models can recognize object states, such as whether a box is open or closed. Editing their interpretation of one object’s state raises a harder question: will counts and other dependent answers update consistently while facts about unedited objects remain intact? We introduce HINGE, a benchmark that tests these requirements on rendered scenes and natural photographs. Its questions distinguish the requested state change, its consequences, and facts that should be preserved. Intervention experiments characterize cross-object state spillover, where editing one object changes a previously correct state answer about another. We further introduce Swing Editor, which keeps the model frozen and learns one additive vector per desired state, applied to the selected object’s visual features. Evaluation spans seven models: Qwen3.5 (4B–27B), Gemma 4 (E2B and 31B), and InternVL3.5 (4B–38B). Swing Editor uses approximately 0.27–0.33% of the trainable parameters of low-rank adaptation (LoRA) on Qwen3.5-4B and 9B. Trained only on single-object edits in synthetic scenes, it correctly answers every scene question after two simultaneous edits in 82.5–97.5% of trials, averaging 91.8% versus LoRA’s 81.3% across the seven models. Without photograph training, it achieves 56.2–79.0% success on real photographs, requiring both the requested state and all available preservation checks to be correct. Adding photograph training raises this to 74.8–88.1%. With additional double-object supervision, mean scene success reaches 96.4%. Comparisons with object-local LoReFT and RED expose complementary composition and preservation trade-offs.</div>
+        <p class="pub-authors">Chih-Ting Liao, Yitong Qiao, <span class="me">Qinglong Zheng</span>, Huqin Weng, Fei Shen, Xin Cao, Tat-Seng Chua</p>
+        <p class="pub-desc">A benchmark that tests requested object-state changes, their consequences, and the preservation of unaffected facts in synthetic scenes and natural photographs, plus Swing Editor, which learns object-local state vectors with the VLM frozen.</p>
+        
+        <div class="metric">91.8% mean double-edit scene success across seven VLMs after single-object training, vs 81.3% for LoRA</div>
+        
+      </div>
+    </article>
+    </div>
+    <p class="pub-empty" id="pub-empty" hidden>No publications match.</p>
+  </div>
+</section>
+
+<section id="background" aria-labelledby="background-h">
+  <div class="sec-head"><span class="sec-ico"><svg class="ico " aria-hidden="true"><use href="#i-cap"/></svg></span><h2 id="background-h">Education & Service</h2></div>
+  <div class="two-col">
+    <div>
+      <h3>Education</h3>
+      <ul class="edu">
+        <li><b>University of Illinois Urbana-Champaign</b><span class="deg">Master's degree in Computer Science</span><span class="when">Sep 2024 – Dec 2025</span></li>
+        <li><b>Pennsylvania State University</b><span class="deg">Bachelor's degree in Computer Science</span><span class="when">Aug 2020 – May 2024</span><span class="note">Minors in Mathematics and Statistics. Dean's List.</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Academic Service</h3>
+      <p class="svc-label">Reviewer</p><ul class="plain-list"><li>Conference on Language Modeling (COLM) 2026</li><li>International Conference on Learning Representations (ICLR) 2027</li><li>IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact" aria-labelledby="contact-h">
+  <div class="sec-head"><span class="sec-ico"><svg class="ico " aria-hidden="true"><use href="#i-mail"/></svg></span><h2 id="contact-h">Contact</h2></div>
+  <div class="contact-card">
+    <p>I am always happy to talk about agentic RL, credit assignment and reward design, and to hear about Ph.D. openings and collaborations. Email is the fastest way to reach me.</p>
+    <div class="contact-links">
+      <a class="cbtn primary js-email" href="#contact" data-u="qzheng19" data-d="illinois.edu"><svg class="ico " aria-hidden="true"><use href="#i-mail"/></svg><span class="js-email-text">qzheng19 [at] illinois.edu</span></a>
+      <a class="cbtn js-email" href="#contact" data-u="qinglong.qz" data-d="gmail.com"><svg class="ico " aria-hidden="true"><use href="#i-mail"/></svg><span class="js-email-text">qinglong.qz [at] gmail.com</span></a>
+      <a class="cbtn narrow-only" href="assets/Qinglong_Zheng_CV.pdf" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg>CV</a>
+      <a class="cbtn narrow-only" href="https://github.com/RayquazaX" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-code"/></svg>GitHub</a>
+      <a class="cbtn narrow-only" href="https://openreview.net/profile?id=~Qinglong_Zheng1" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-review"/></svg>OpenReview</a>
+      <a class="cbtn narrow-only" href="https://orcid.org/0009-0001-8882-6952" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-id"/></svg>ORCID</a>
+    </div>
+  </div>
+</section>
+</main>
+</div>
+
+<footer class="footer">
+  <div class="footer-in">
+    <span>© 2026 Qinglong Zheng · Last updated November 2026</span>
+    <a href="#top"><svg class="ico " aria-hidden="true"><use href="#i-up"/></svg>Back to top</a>
+  </div>
+</footer>
+
+<div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Quick search">
+  <div class="cmdk-box">
+    <div class="cmdk-in"><svg class="ico " aria-hidden="true"><use href="#i-search"/></svg><input type="text" id="cmdk-input" placeholder="Jump to a section, paper, or link" autocomplete="off" spellcheck="false" aria-controls="cmdk-list"><kbd>esc</kbd></div>
+    <ul class="cmdk-list" id="cmdk-list" role="listbox"></ul>
+    <div class="cmdk-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span></div>
+  </div>
+</div>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+<script type="application/json" id="cmdk-data">[{"t":"News","k":"Section","h":"#news"},{"t":"Featured","k":"Section","h":"#featured"},{"t":"Publications","k":"Section","h":"#publications"},{"t":"Education & Service","k":"Section","h":"#background"},{"t":"Contact","k":"Section","h":"#contact"},{"t":"Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models","s":"ProcedureRL Reward Design for Reinforcement Learning","k":"ProcedureRL","h":"#pub-parl"},{"t":"A General Decision Model Is a General Process Reward Model: Zero-Shot Step Credit for RL Post-Training of LLM Agents","s":"DM-PRM Reward Design for Reinforcement Learning","k":"DM-PRM","h":"#pub-dmprm"},{"t":"STaR-VL: Capability-Aligned Reinforcement Learning for Visual-Temporal Memory","s":"STaR-VL Reward Design for Reinforcement Learning","k":"STaR-VL","h":"#pub-starvl"},{"t":"When to Ask, When to Act: Persona-Conditioned Clarification for Multi-Turn Human-LLM Collaboration","s":"TactfulLLM Reward Design for Reinforcement Learning","k":"TactfulLLM","h":"#pub-tactful"},{"t":"SKT: Self-Evolving Agent Skill Library with Plan-Driven Test-Time Self-Correction","s":"SKT Training-Free Improvement at Test Time","k":"SKT","h":"#pub-skt"},{"t":"Where Do Loops Help? Reallocating Test-Time Compute in Looped Diffusion Transformers","s":"LoopScout Training-Free Improvement at Test Time","k":"LoopScout","h":"#pub-loopscout"},{"t":"Retrieval is Cheap, Show Me the Code: Executable Multi-Hop Reasoning for Retrieval-Augmented Generation","s":"PyRAG Training-Free Improvement at Test Time","k":"PyRAG","h":"#pub-pyrag"},{"t":"How Much Can Language Models Gain from Test-Time Computation?","s":"SELF-POT Training-Free Improvement at Test Time","k":"SELF-POT","h":"#pub-selfpot"},{"t":"Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models","s":"Keystone Training-Free Improvement at Test Time","k":"Keystone","h":"#pub-keystone"},{"t":"What Drives the Prediction? How Neural Models Rely on Physical Information","s":"MII Model Editing & Interpretability","k":"MII","h":"#pub-mii"},{"t":"Keel: A Frontier Model Teaches a Vision-Language Model by Rewriting Its Weights","s":"Keel Model Editing & Interpretability","k":"Keel","h":"#pub-keel"},{"t":"HINGE: From Cross-Object Spillover to Selective State Editing","s":"HINGE Model Editing & Interpretability","k":"HINGE","h":"#pub-hinge"},{"t":"CV","k":"Link","h":"assets/Qinglong_Zheng_CV.pdf"},{"t":"GitHub","k":"Link","h":"https://github.com/RayquazaX"},{"t":"OpenReview","k":"Link","h":"https://openreview.net/profile?id=~Qinglong_Zheng1"},{"t":"ORCID","k":"Link","h":"https://orcid.org/0009-0001-8882-6952"},{"t":"Email me","k":"Link","h":"mailto"},{"t":"Toggle light / dark theme","k":"Action","h":"theme"}]</script>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
