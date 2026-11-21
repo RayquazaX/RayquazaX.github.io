@@ -13,12 +13,12 @@
 <meta property="og:url" content="https://rayquazax.github.io/">
 <meta property="og:image" content="https://rayquazax.github.io/assets/img/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#1d4592">
+<meta name="theme-color" content="#0f7b6c">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <script>(function(){try{if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500;1,6..72,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Qinglong Zheng","url":"https://rayquazax.github.io","description":"Qinglong Zheng studies how LLM agents can learn from their own experience on long, multi-step tasks, during training with reinforcement learning and after it without retraining. Master's degree in Computer Science from UIUC; advised by Prof. Ge Liu.","affiliation":{"@type":"CollegeOrUniversity","name":"University of Illinois Urbana-Champaign"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Illinois Urbana-Champaign"},{"@type":"CollegeOrUniversity","name":"Pennsylvania State University"}],"knowsAbout":["Reinforcement learning","LLM agents","Credit assignment","Reward design","Test-time computation","Vision-language models"],"sameAs":["https://github.com/RayquazaX","https://orcid.org/0009-0001-8882-6952","https://openreview.net/profile?id=~Qinglong_Zheng1"]}</script>
 </head>
@@ -39,56 +39,38 @@
     <button class="kbd-btn theme-btn" type="button" id="theme-toggle" aria-label="Switch between light and dark theme"><svg class="ico i-moon" aria-hidden="true"><use href="#i-moon"/></svg><svg class="ico i-sun" aria-hidden="true"><use href="#i-sun"/></svg></button>
   </div>
 </header>
-<div class="page" id="top">
-
-<aside class="sidebar no-photo" aria-label="Profile">
-  <div class="avatar"><svg viewBox="0 0 120 120" role="img" aria-label="Qinglong Zheng"><defs><linearGradient id="av" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b3263"/><stop offset="1" stop-color="#1c5cc0"/></linearGradient></defs><rect width="120" height="120" fill="url(#av)"/><text x="60" y="62" text-anchor="middle" dominant-baseline="central" font-family="Newsreader, Georgia, serif" font-size="46" font-weight="600" fill="#fff">QZ</text></svg></div>
-  <p class="side-name">Qinglong Zheng</p>
-  <ul class="side-links">
-    <li><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg><a class="" href="assets/Qinglong_Zheng_CV.pdf" target="_blank" rel="noopener">CV</a></li>
-    <li><svg class="ico " aria-hidden="true"><use href="#i-mail"/></svg><a class=" js-email" href="#contact" data-u="qzheng19" data-d="illinois.edu">Email</a></li>
-    <li><svg class="ico " aria-hidden="true"><use href="#i-code"/></svg><a class="" href="https://github.com/RayquazaX" target="_blank" rel="noopener">GitHub</a></li>
-    <li><svg class="ico " aria-hidden="true"><use href="#i-review"/></svg><a class="" href="https://openreview.net/profile?id=~Qinglong_Zheng1" target="_blank" rel="noopener">OpenReview</a></li>
-    <li><svg class="ico " aria-hidden="true"><use href="#i-id"/></svg><a class="" href="https://orcid.org/0009-0001-8882-6952" target="_blank" rel="noopener">ORCID</a></li>
-  </ul>
-</aside>
 <main id="main">
 
-<section class="hero" aria-label="Introduction">
-  
-<svg class="hero-art" viewBox="0 0 800 460" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
-  <path class="trail" d="M-10 160 40 120 90 70 150 105 205 48 270 30 340 18 420 26 500 14 575 34 640 22 720 56 770 104 810 150"/>
-  <path class="dead" d="M150 105 124 148 88 166"/>
-  <circle class="halo" cx="90" cy="70" r="9"/><circle class="halo" cx="420" cy="26" r="9"/><circle class="halo" cx="720" cy="56" r="9"/>
-  <circle class="step" cx="40" cy="120" r="3"/><circle class="step" cx="150" cy="105" r="3"/><circle class="step" cx="205" cy="48" r="3"/><circle class="step" cx="270" cy="30" r="3"/><circle class="step" cx="340" cy="18" r="3"/><circle class="step" cx="500" cy="14" r="3"/><circle class="step" cx="575" cy="34" r="3"/><circle class="step" cx="640" cy="22" r="3"/><circle class="step" cx="770" cy="104" r="3"/>
-  <circle class="wasted" cx="124" cy="148" r="3"/><circle class="wasted" cx="88" cy="166" r="3"/>
-  <circle class="key" cx="90" cy="70" r="4.4"/><circle class="key" cx="420" cy="26" r="4.4"/><circle class="key" cx="720" cy="56" r="4.4"/>
-  <circle class="dust" cx="250" cy="96" r="1.3"/><circle class="dust" cx="612" cy="96" r="1.3"/><circle class="dust" cx="690" cy="168" r="1.3"/><circle class="dust" cx="36" cy="330" r="1.3"/><circle class="dust" cx="764" cy="300" r="1.3"/><circle class="dust" cx="742" cy="410" r="1.3"/><circle class="dust" cx="58" cy="428" r="1.3"/><circle class="dust" cx="176" cy="196" r="1.3"/><circle class="dust" cx="556" cy="150" r="1.3"/>
-</svg>
-  <h1>Qinglong Zheng</h1>
-  <a class="status-pill" href="#contact">Applying to Ph.D. programs · 2027 intake</a>
-  <ul class="tiles">
-    <li><a class="tile" href="#pub-parl"><svg viewBox="0 0 52 30" aria-hidden="true"><circle cx="9" cy="15" r="5"/><rect x="37" y="10" width="10" height="10" rx="2.5"/><path d="M14 11C20 5 30 5 36 10M32 6l4 4-5 1"/><path class="g" d="M36 20C30 25 20 25 15 20M19 24l-4-4 5-1"/></svg><span>Agentic RL</span></a></li>
-    <li><a class="tile" href="#pub-dmprm"><svg viewBox="0 0 52 30" aria-hidden="true"><path d="M3 15h46" opacity=".4"/><circle class="wf" cx="5" cy="15" r="2.2"/><circle class="wf" cx="12" cy="15" r="2.2"/><circle class="gf" cx="20" cy="15" r="3.6"/><circle class="wf" cx="28" cy="15" r="2.2"/><circle class="wf" cx="35" cy="15" r="2.2"/><circle class="gf" cx="42" cy="15" r="3.6"/><circle class="wf" cx="49" cy="15" r="2.2"/></svg><span>Reward Design</span></a></li>
-    <li><a class="tile" href="#pub-skt"><svg viewBox="0 0 52 30" aria-hidden="true"><rect x="6" y="13" width="26" height="12" rx="2.5"/><path d="M9 9.5h20M12 6h14"/><path class="g" d="M42 10v10M37 15h10"/></svg><span>Self-Improving Agents</span></a></li>
-    <li><a class="tile" href="#pub-loopscout"><svg viewBox="0 0 52 30" aria-hidden="true"><path d="M5 4v22h43" opacity=".55"/><path class="g" d="M6 24C14 10 26 7 47 6"/></svg><span>Test-Time Compute</span></a></li>
-  </ul>
-  <ul class="hero-links narrow-only">
-    <li><a class="hbtn" href="assets/Qinglong_Zheng_CV.pdf" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg>CV</a></li>
-    <li><a class="hbtn js-email" href="#contact" data-u="qzheng19" data-d="illinois.edu"><svg class="ico " aria-hidden="true"><use href="#i-mail"/></svg>Email</a></li>
-    <li><a class="hbtn" href="https://github.com/RayquazaX" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-code"/></svg>GitHub</a></li>
-    <li><a class="hbtn" href="https://openreview.net/profile?id=~Qinglong_Zheng1" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-review"/></svg>OpenReview</a></li>
-    <li><a class="hbtn" href="https://orcid.org/0009-0001-8882-6952" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-id"/></svg>ORCID</a></li>
-  </ul>
-</section>
+<div class="band" id="top">
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-main">
+      <div class="hero-id"><h1>Qinglong Zheng</h1></div>
+      <a class="status-pill" href="#contact">Applying to Ph.D. programs · 2027 intake</a>
+      <div class="bio">
+        <p>I am a CS master's graduate of the University of Illinois Urbana-Champaign, advised by Prof. Ge Liu. I study how to make LLM agents learn from their own experience on long, multi-step tasks: <strong>during training</strong>, with reinforcement learning that rewards how a task was carried out and not only whether it succeeded (e.g., process rewards), and <strong>after training</strong>, where a frozen model keeps improving without retraining (e.g., a skill library the agent writes from its own trials).</p>
+        
+      </div>
+      <ul class="hero-links">
+        <li><a class="hbtn" href="assets/Qinglong_Zheng_CV.pdf" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg>CV</a></li>
+        <li><a class="hbtn js-email" href="#contact" data-u="qzheng19" data-d="illinois.edu"><svg class="ico " aria-hidden="true"><use href="#i-mail"/></svg>Email</a></li>
+        <li><a class="hbtn" href="https://github.com/RayquazaX" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-code"/></svg>GitHub</a></li>
+        <li><a class="hbtn" href="https://openreview.net/profile?id=~Qinglong_Zheng1" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-review"/></svg>OpenReview</a></li>
+        <li><a class="hbtn" href="https://orcid.org/0009-0001-8882-6952" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-id"/></svg>ORCID</a></li>
+      </ul>
+    </div>
+    <ul class="tiles">
+      <li><a class="tile" href="#pub-parl"><svg viewBox="0 0 52 30" aria-hidden="true"><circle cx="9" cy="15" r="5"/><rect x="37" y="10" width="10" height="10" rx="2.5"/><path d="M14 11C20 5 30 5 36 10M32 6l4 4-5 1"/><path class="g" d="M36 20C30 25 20 25 15 20M19 24l-4-4 5-1"/></svg><span>Agentic RL</span></a></li>
+      <li><a class="tile" href="#pub-dmprm"><svg viewBox="0 0 52 30" aria-hidden="true"><path d="M3 15h46" opacity=".4"/><circle class="wf" cx="5" cy="15" r="2.2"/><circle class="wf" cx="12" cy="15" r="2.2"/><circle class="gf" cx="20" cy="15" r="3.6"/><circle class="wf" cx="28" cy="15" r="2.2"/><circle class="wf" cx="35" cy="15" r="2.2"/><circle class="gf" cx="42" cy="15" r="3.6"/><circle class="wf" cx="49" cy="15" r="2.2"/></svg><span>Reward Design</span></a></li>
+      <li><a class="tile" href="#pub-skt"><svg viewBox="0 0 52 30" aria-hidden="true"><rect x="6" y="13" width="26" height="12" rx="2.5"/><path d="M9 9.5h20M12 6h14"/><path class="g" d="M42 10v10M37 15h10"/></svg><span>Self-Improving Agents</span></a></li>
+      <li><a class="tile" href="#pub-loopscout"><svg viewBox="0 0 52 30" aria-hidden="true"><path d="M5 4v22h43" opacity=".55"/><path class="g" d="M6 24C14 10 26 7 47 6"/></svg><span>Test-Time Compute</span></a></li>
+    </ul>
+  </section>
+</div>
+<div class="page">
 
-<section class="bio" aria-label="About">
-  <p>I am a CS master's graduate of the University of Illinois Urbana-Champaign, advised by Prof. Ge Liu. I study how to make LLM agents learn from their own experience on long, multi-step tasks: <strong>during training</strong>, with reinforcement learning that rewards how a task was carried out and not only whether it succeeded (e.g., process rewards), and <strong>after training</strong>, where a frozen model keeps improving without retraining (e.g., a skill library the agent writes from its own trials).</p>
-  
-</section>
-
-<section id="news" aria-labelledby="news-h">
-  <div class="sec-head"><span class="sec-ico"><svg class="ico " aria-hidden="true"><use href="#i-news"/></svg></span><h2 id="news-h">Latest News</h2></div>
+<section class="sec" id="news" aria-labelledby="news-h">
+  <div class="sec-head"><h2 id="news-h">Latest News</h2></div>
+  <div class="sec-body">
   <ul class="news">
     <li><time>Nov 2026</time><p>Four new papers: <a href="#pub-loopscout">LoopScout</a> and <a href="#pub-keystone">Keystone</a> on test-time search for diffusion models, <a href="#pub-keel">Keel</a> and <a href="#pub-hinge">HINGE</a> on repairing and editing vision-language models.</p></li>
     <li><time>Oct 2026</time><p><strong>ProcedureRL</strong> is at COLM 2026 in San Francisco (Oct 6–9), Poster Session 1. <a href="https://www.jiajunfan.com/projects/procedure-aware-rl/" target="_blank" rel="noopener">Project page</a> · <a href="https://openreview.net/forum?id=d4wrBuJ4xo" target="_blank" rel="noopener">Paper</a></p></li>
@@ -101,10 +83,12 @@
     <li><time>May 2026</time><p><strong>PyRAG</strong> is on arXiv: multi-hop RAG reformulated as writing and executing a Python program. <a href="https://arxiv.org/abs/2605.12975" target="_blank" rel="noopener">Paper</a> · <a href="https://github.com/GasolSun36/PyRAG" target="_blank" rel="noopener">Code</a></p></li>
   </ul>
   
+  </div>
 </section>
 
-<section id="featured" aria-labelledby="featured-h">
-  <div class="sec-head"><span class="sec-ico"><svg class="ico " aria-hidden="true"><use href="#i-star"/></svg></span><h2 id="featured-h">Featured Research</h2></div>
+<section class="sec" id="featured" aria-labelledby="featured-h">
+  <div class="sec-head"><h2 id="featured-h">Featured Research</h2></div>
+  <div class="sec-body">
   <div class="cards">
     <a class="card" href="#pub-parl">
       <svg class="card-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ProcedureRL">
@@ -116,7 +100,7 @@
     <text class="lbl" x="56" y="88">SAME CALLS, RIGHT ORDER</text>
     <path class="ln" d="M83 112h44M153 112h44M223 112h44M293 112h30"/>
     <circle class="node" cx="70" cy="112" r="13"/><text class="num" x="70" y="112">1</text><circle class="node" cx="140" cy="112" r="13"/><text class="num" x="140" y="112">2</text><circle class="node" cx="210" cy="112" r="13"/><text class="num" x="210" y="112">3</text><circle class="node" cx="280" cy="112" r="13"/><text class="num" x="280" y="112">4</text>
-    <circle class="hot" cx="340" cy="112" r="13"/><path d="M335 113l3.5 3.5 6.5-7.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <circle class="hot" cx="340" cy="112" r="13"/><path class="tick" d="M335 113l3.5 3.5 6.5-7.5"/></svg>
       <div class="card-body">
         <h3>ProcedureRL: Rewarding <em>How</em> Tools Are Called</h3>
         <p>Correct calls in the wrong order still fail. A procedural reward scores the order of the call chain, and a 3B model learns to sequence its tools.</p>
@@ -174,10 +158,12 @@
       </div>
     </a>
   </div>
+  </div>
 </section>
 
-<section id="publications" aria-labelledby="publications-h">
-  <div class="sec-head"><span class="sec-ico"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg></span><h2 id="publications-h">Publications</h2></div>
+<section class="sec" id="publications" aria-labelledby="publications-h">
+  <div class="sec-head"><h2 id="publications-h">Publications</h2></div>
+  <div class="sec-body">
   <p class="sec-note">A paper with no venue shown is under review; its manuscript is available <a class="js-email" href="#contact" data-u="qzheng19" data-d="illinois.edu">on request</a>.</p>
   <div class="pub-tools">
     <label class="search"><svg class="ico " aria-hidden="true"><use href="#i-search"/></svg><span class="sr-only">Search publications</span><input type="search" id="pub-search" placeholder="Search papers" autocomplete="off"></label>
@@ -195,7 +181,7 @@
     <text class="lbl" x="56" y="88">SAME CALLS, RIGHT ORDER</text>
     <path class="ln" d="M83 112h44M153 112h44M223 112h44M293 112h30"/>
     <circle class="node" cx="70" cy="112" r="13"/><text class="num" x="70" y="112">1</text><circle class="node" cx="140" cy="112" r="13"/><text class="num" x="140" y="112">2</text><circle class="node" cx="210" cy="112" r="13"/><text class="num" x="210" y="112">3</text><circle class="node" cx="280" cy="112" r="13"/><text class="num" x="280" y="112">4</text>
-    <circle class="hot" cx="340" cy="112" r="13"/><path d="M335 113l3.5 3.5 6.5-7.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <circle class="hot" cx="340" cy="112" r="13"/><path class="tick" d="M335 113l3.5 3.5 6.5-7.5"/></svg></div>
       <div class="pub-body">
         <div class="pub-meta"><span class="badge k-conference">COLM 2026</span></div>
         <h4 class="pub-title"><span class="pub-n">1</span><a href="https://openreview.net/forum?id=d4wrBuJ4xo" target="_blank" rel="noopener">Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models</a></h4>
@@ -277,7 +263,7 @@
     <text class="lbl" x="300" y="48">PATIENT · ASK</text>
     <rect class="paper" x="236" y="92" width="54" height="36" rx="6"/>
     <path class="ln-dim" d="M246 104h22M252 112h26M246 120h16"/>
-    <circle class="hot" cx="290" cy="92" r="9"/><path d="M285 93l3.5 3.5 6.5-7.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle class="hot" cx="290" cy="92" r="9"/><path class="tick" d="M285 93l3.5 3.5 6.5-7.5"/>
     <text class="lbl" x="304" y="114">BUSY · ACT</text></svg></div>
       <div class="pub-body">
         
@@ -413,7 +399,7 @@
     <rect class="node" x="154" y="69" width="22" height="22" rx="4"/>
     <rect class="paper" x="306" y="58" width="44" height="44" rx="6"/>
     <circle class="solid" cx="320" cy="74" r="5.5"/><rect class="solid-dim" x="330" y="82" width="11" height="11" rx="2"/>
-    <circle class="hot" cx="354" cy="56" r="10"/><path d="M349 57l3.5 3.5 6.5-7.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <circle class="hot" cx="354" cy="56" r="10"/><path class="tick" d="M349 57l3.5 3.5 6.5-7.5"/></svg></div>
       <div class="pub-body">
         
         <h4 class="pub-title"><span class="pub-n">9</span>Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models</h4>
@@ -461,7 +447,7 @@
     <path class="ln" d="M252 76h40M292 76l-7-4M292 76l-7 4"/>
     <rect class="paper" x="302" y="50" width="62" height="52" rx="8"/>
     <path class="ln" d="M314 68h38M314 82h24"/>
-    <circle class="hot" cx="362" cy="50" r="10"/><path d="M357 51l3.5 3.5 6.5-7.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <circle class="hot" cx="362" cy="50" r="10"/><path class="tick" d="M357 51l3.5 3.5 6.5-7.5"/></svg></div>
       <div class="pub-body">
         
         <h4 class="pub-title"><span class="pub-n">11</span>Keel: A Frontier Model Teaches a Vision-Language Model by Rewriting Its Weights</h4>
@@ -502,10 +488,12 @@
     </div>
     <p class="pub-empty" id="pub-empty" hidden>No publications match.</p>
   </div>
+  </div>
 </section>
 
-<section id="background" aria-labelledby="background-h">
-  <div class="sec-head"><span class="sec-ico"><svg class="ico " aria-hidden="true"><use href="#i-cap"/></svg></span><h2 id="background-h">Education & Service</h2></div>
+<section class="sec" id="background" aria-labelledby="background-h">
+  <div class="sec-head"><h2 id="background-h">Education & Service</h2></div>
+  <div class="sec-body">
   <div class="two-col">
     <div>
       <h3>Education</h3>
@@ -519,24 +507,23 @@
       <p class="svc-label">Reviewer</p><ul class="plain-list"><li>Conference on Language Modeling (COLM) 2026</li><li>International Conference on Learning Representations (ICLR) 2027</li><li>IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</li></ul>
     </div>
   </div>
+  </div>
 </section>
 
-<section id="contact" aria-labelledby="contact-h">
-  <div class="sec-head"><span class="sec-ico"><svg class="ico " aria-hidden="true"><use href="#i-mail"/></svg></span><h2 id="contact-h">Contact</h2></div>
+<section class="sec" id="contact" aria-labelledby="contact-h">
+  <div class="sec-head"><h2 id="contact-h">Contact</h2></div>
+  <div class="sec-body">
   <div class="contact-card">
     <p>I am always happy to talk about agentic RL, credit assignment and reward design, and to hear about Ph.D. openings and collaborations. Email is the fastest way to reach me.</p>
     <div class="contact-links">
       <a class="cbtn primary js-email" href="#contact" data-u="qzheng19" data-d="illinois.edu"><svg class="ico " aria-hidden="true"><use href="#i-mail"/></svg><span class="js-email-text">qzheng19 [at] illinois.edu</span></a>
       <a class="cbtn js-email" href="#contact" data-u="qinglong.qz" data-d="gmail.com"><svg class="ico " aria-hidden="true"><use href="#i-mail"/></svg><span class="js-email-text">qinglong.qz [at] gmail.com</span></a>
-      <a class="cbtn narrow-only" href="assets/Qinglong_Zheng_CV.pdf" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg>CV</a>
-      <a class="cbtn narrow-only" href="https://github.com/RayquazaX" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-code"/></svg>GitHub</a>
-      <a class="cbtn narrow-only" href="https://openreview.net/profile?id=~Qinglong_Zheng1" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-review"/></svg>OpenReview</a>
-      <a class="cbtn narrow-only" href="https://orcid.org/0009-0001-8882-6952" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-id"/></svg>ORCID</a>
     </div>
   </div>
+  </div>
 </section>
-</main>
 </div>
+</main>
 
 <footer class="footer">
   <div class="footer-in">
