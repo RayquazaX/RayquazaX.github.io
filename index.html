@@ -72,6 +72,7 @@
   <div class="sec-head"><h2 id="news-h">Latest News</h2></div>
   <div class="sec-body">
   <ul class="news">
+    <li><time>Nov 2026</time><p><strong>Self-Upgrading Embodied Agents</strong> is on arXiv: an embodied agent that upgrades its own weights between tasks, with no gradient, reward model or second model, and keeps an edit only if it holds against its unchanged self. <a href="https://arxiv.org/abs/2611.31117" target="_blank" rel="noopener">Paper</a></p></li>
     <li><time>Nov 2026</time><p>Four new papers: <a href="#pub-loopscout">LoopScout</a> and <a href="#pub-keystone">Keystone</a> on test-time search for diffusion models, <a href="#pub-keel">Keel</a> and <a href="#pub-hinge">HINGE</a> on repairing and editing vision-language models.</p></li>
     <li><time>Oct 2026</time><p><strong>ProcedureRL</strong> is at COLM 2026 in San Francisco (Oct 6–9), Poster Session 1. <a href="https://www.jiajunfan.com/projects/procedure-aware-rl/" target="_blank" rel="noopener">Project page</a> · <a href="https://openreview.net/forum?id=d4wrBuJ4xo" target="_blank" rel="noopener">Paper</a></p></li>
     <li><time>Oct 2026</time><p>New paper, <a href="#pub-dmprm">DM-PRM</a>: per-step credit for agent RL without a learned critic.</p></li>
@@ -200,7 +201,7 @@
 }"><svg class="ico " aria-hidden="true"><use href="#i-braces"/></svg><span>BibTeX</span></button></div>
       </div>
     </article>
-      <article class="pub" id="pub-dmprm" data-area="credit" data-text="a general decision model is a general process reward model: zero-shot step credit for rl post-training of llm agents dm-prm under review turns a fixed general decision model into a zero-shot process reward model: it scores each action's progress from the complete execution log and its outcome, and the standardized scores are added to grpo's outcome-based advantage. no step labels, no scorer training, no value critic. reward design for reinforcement learning jiajun fan qinglong zheng ziwen wang bangji yang neil he ruihan guo chaoran cheng ge liu">
+      <article class="pub" id="pub-dmprm" data-area="credit" data-text="a general decision model is a general process reward model: zero-shot step credit for rl post-training of llm agents dm-prm arxiv 2026 turns a fixed general decision model into a zero-shot process reward model: it scores each action's progress from the complete execution log and its outcome, and the standardized scores are added to grpo's outcome-based advantage. no step labels, no scorer training, no value critic. reward design for reinforcement learning jiajun fan qinglong zheng ziwen wang bangji yang neil he ruihan guo chaoran cheng ge liu">
       <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="DM-PRM">
     <ellipse class="a" cx="132" cy="84" rx="128" ry="58"/><ellipse class="b" cx="326" cy="72" rx="68" ry="50"/>
     <text class="lbl" x="48" y="28">ONE OUTCOME → CREDIT PER STEP</text>
@@ -213,15 +214,15 @@
     <text class="dim" x="303" y="80">yes  0.86</text>
     <text class="dim" x="303" y="95">no   0.14</text></svg></div>
       <div class="pub-body">
-        
-        <h4 class="pub-title"><span class="pub-n">2</span>A General Decision Model Is a General Process Reward Model: Zero-Shot Step Credit for RL Post-Training of LLM Agents</h4>
+        <div class="pub-meta"><span class="badge k-preprint">arXiv 2026</span></div>
+        <h4 class="pub-title"><span class="pub-n">2</span><a href="https://arxiv.org/abs/2611.27068" target="_blank" rel="noopener">A General Decision Model Is a General Process Reward Model: Zero-Shot Step Credit for RL Post-Training of LLM Agents</a></h4>
         <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-dmprm">▾ Abstract</button>
         <div class="pub-abs" id="abs-dmprm" hidden>Reinforcement learning (RL) from verifiable outcomes gives a language agent one reward per episode: every step is credited alike, and nothing is learned when all rollouts fail. Step-level credit usually needs step labels, a learned critic, costly LLM judges or hand-written rules. We introduce DM-PRM, which turns a general decision model – one answering yes/no questions with probabilities – into a general process reward model (PRM), zero-shot: no step labels, no fine-tuning, no critic. DM-PRM asks one question per step and adds the standardised answers to the advantage. It is plug-and-play for any policy-gradient method and general: one model serves household tasks, web shopping and multiple RL methods. With Qwen2.5-1.5B it lifts GRPO by over twenty points on ALFWorld and over ten on WebShop, overtakes GiGPO on ALFWorld and learns in far fewer iterations; it also improves GiGPO and GraphGPO on both benchmarks and reaches the highest success of our comparison, ahead of critic-based PPO and of state-of-the-art GiGPO, HGPO and GraphGPO. Its scores locate the useful steps of failed rollouts, and trained agents drop idle actions and explore instead of circling. DM-PRM shows that step credit need not be learned: it can be asked for.</div>
         <p class="pub-authors">Jiajun Fan, <span class="me">Qinglong Zheng</span>, Ziwen Wang, Bangji Yang, Neil He, Ruihan Guo, Chaoran Cheng, Ge Liu</p>
         <p class="pub-desc">Turns a fixed general decision model into a zero-shot process reward model: it scores each action's progress from the complete execution log and its outcome, and the standardized scores are added to GRPO's outcome-based advantage. No step labels, no scorer training, no value critic.</p>
         
         <div class="metric">Lifts GRPO by over 20 points on ALFWorld and over 10 on WebShop with Qwen2.5-1.5B-Instruct</div>
-        
+        <div class="pub-links"><a class="plink" href="https://arxiv.org/abs/2611.27068" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg>arXiv</a></div>
       </div>
     </article>
       <article class="pub" id="pub-starvl" data-area="credit" data-text="star-vl: capability-aligned reinforcement learning for visual-temporal memory star-vl under review a staged post-training framework that pairs supervised fine-tuning with capability-aligned reinforcement learning, teaching a vision-language model perceptual grounding and visual-temporal memory. reward design for reinforcement learning chih-ting liao zhikai pan qinglong zheng xin cao">
@@ -389,7 +390,7 @@
 }"><svg class="ico " aria-hidden="true"><use href="#i-braces"/></svg><span>BibTeX</span></button></div>
       </div>
     </article>
-      <article class="pub" id="pub-keystone" data-area="testtime" data-text="keystone: judging previews at key steps for test-time search in diffusion models keystone under review a training-free verifier that compiles a prompt into typed questions and has an off-the-shelf multimodal decision model judge intermediate clean-image predictions, combined with adaptive search and pruning. training-free improvement at test time jiajun fan chaoran cheng ziwen wang changyi yang bangji yang qinglong zheng ge liu">
+      <article class="pub" id="pub-keystone" data-area="testtime" data-text="keystone: judging previews at key steps for test-time search in diffusion models keystone arxiv 2026 a training-free verifier that compiles a prompt into typed questions and has an off-the-shelf multimodal decision model judge intermediate clean-image predictions, combined with adaptive search and pruning. training-free improvement at test time jiajun fan chaoran cheng ziwen wang changyi yang bangji yang qinglong zheng ge liu">
       <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Keystone">
     <ellipse class="a" cx="124" cy="78" rx="124" ry="58"/><ellipse class="b" cx="318" cy="76" rx="80" ry="52"/>
     <path class="hot-ln dash" d="M165 30v102"/>
@@ -401,15 +402,15 @@
     <circle class="solid" cx="320" cy="74" r="5.5"/><rect class="solid-dim" x="330" y="82" width="11" height="11" rx="2"/>
     <circle class="hot" cx="354" cy="56" r="10"/><path class="tick" d="M349 57l3.5 3.5 6.5-7.5"/></svg></div>
       <div class="pub-body">
-        
-        <h4 class="pub-title"><span class="pub-n">9</span>Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models</h4>
+        <div class="pub-meta"><span class="badge k-preprint">arXiv 2026</span></div>
+        <h4 class="pub-title"><span class="pub-n">9</span><a href="https://arxiv.org/abs/2611.25530" target="_blank" rel="noopener">Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models</a></h4>
         <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-keystone">▾ Abstract</button>
         <div class="pub-abs" id="abs-keystone" hidden>Text-to-image diffusion and flow models yield a preview, their clean-image estimate, at every denoising step. When they miscount, drop or misplace objects, test-time search is in a bind: its verifiers are reward models built for finished images, so judging early misreads blurry previews, and judging late, as best-of-N does, pays to fully denoise doomed candidates. We find that the image is not the problem: the outcome is settled as denoising starts, by the seed or by a stochastic sampler’s first steps, and already shows in early previews; what fails on them is the judge, as reward models read them near chance on several kinds of prompts. We introduce Keystone, a training-free judge of previews that compiles a prompt into typed questions about its objects, counts, colours and positions and has an off-the-shelf multimodal decision model answer them. Asked this way, the judge reads counts and positions from early previews better than reward models read them from finished images. Searching at these key steps on GenEval with SD3.5-Medium, Keystone’s adaptive search and pruning significantly outperform best-of-8 with every other verifier at under half its generator compute, and as a drop-in verifier there, the Keystone score significantly improves best-of-N, progressive seed pruning and FK steering; without retuning, both searches stay significantly above the strongest other verifier’s best-of-N on average over four base models and three benchmarks. Keystone thus moves test-time judgment to the key steps where the outcome already shows.</div>
         <p class="pub-authors">Jiajun Fan, Chaoran Cheng, Ziwen Wang, Changyi Yang, Bangji Yang, <span class="me">Qinglong Zheng</span>, Ge Liu</p>
         <p class="pub-desc">A training-free verifier that compiles a prompt into typed questions and has an off-the-shelf multimodal decision model judge intermediate clean-image predictions, combined with adaptive search and pruning.</p>
         
         <div class="metric">Exceeds best-of-8 with other verifiers at less than half the generator compute (GenEval, SD3.5-Medium)</div>
-        
+        <div class="pub-links"><a class="plink" href="https://arxiv.org/abs/2611.25530" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg>arXiv</a></div>
       </div>
     </article>
     </div>
@@ -438,7 +439,7 @@
         
       </div>
     </article>
-      <article class="pub" id="pub-keel" data-area="editing" data-text="keel: a frontier model teaches a vision-language model by rewriting its weights keel under review a frontier multimodal agent diagnoses thinking loops in a small vision-language model, edits its weights, and validates the repair on held-out questions, all without gradient training. model editing &amp; interpretability jiajun fan neil he bangji yang qinglong zheng ziwen wang chaoran cheng changyi yang hanqi mao ge liu">
+      <article class="pub" id="pub-keel" data-area="editing" data-text="keel: a frontier model teaches a vision-language model by rewriting its weights keel arxiv 2026 a frontier multimodal agent diagnoses thinking loops in a small vision-language model, edits its weights, and validates the repair on held-out questions, all without gradient training. model editing &amp; interpretability jiajun fan neil he bangji yang qinglong zheng ziwen wang chaoran cheng changyi yang hanqi mao ge liu">
       <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Keel">
     <ellipse class="a" cx="132" cy="78" rx="126" ry="62"/><ellipse class="b" cx="322" cy="76" rx="72" ry="52"/>
     <path class="ln-dim" d="M98 76a22 22 0 1 1-11-19M87 57l-4-6.9M87 57h-8"/>
@@ -449,15 +450,15 @@
     <path class="ln" d="M314 68h38M314 82h24"/>
     <circle class="hot" cx="362" cy="50" r="10"/><path class="tick" d="M357 51l3.5 3.5 6.5-7.5"/></svg></div>
       <div class="pub-body">
-        
-        <h4 class="pub-title"><span class="pub-n">11</span>Keel: A Frontier Model Teaches a Vision-Language Model by Rewriting Its Weights</h4>
+        <div class="pub-meta"><span class="badge k-preprint">arXiv 2026</span></div>
+        <h4 class="pub-title"><span class="pub-n">11</span><a href="https://arxiv.org/abs/2611.25257" target="_blank" rel="noopener">Keel: A Frontier Model Teaches a Vision-Language Model by Rewriting Its Weights</a></h4>
         <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-keel">▾ Abstract</button>
         <div class="pub-abs" id="abs-keel" hidden>Can a frontier model repair a vision-language model (VLM) by rewriting its weights? Small reasoning VLMs such as Qwen3.5 need such a repair: in thinking mode they fall into loops on many image questions, repeating themselves until the token limit, spending the whole budget and losing the answer. The usual remedies act on the decoding, leaving the looping model as it was, or must be told what to change. Yet the cause is written in the weights. Keel, the first agentic weight-editing method for VLMs on image tasks, finds and removes it there. Told only the symptom, an editor, a frontier multimodal LLM acting as an agent, locates the cause, edits the weights and tests them, with a failure census and instruments showing it the failing images and where the VLM attends; among several editors, the harness keeps only edits that clearly reduce the failure without lowering accuracy on questions no editor saw. The repair needs no training, keeps the model’s size and per-token cost, and applies to already-edited weights. The editors expose where the loops live: from the original weights, independent editors on both models trace them to the attention outputs of the middle layers, and the smaller VLM stops consulting the image inside a loop. On Qwen3.5-0.8B and Qwen3.5-2B, across six image benchmarks from visual mathematics to GUI grounding, the edit removes most loops on every benchmark and shortens answers, and the edited models are significantly more accurate than the thinking models on average; the larger one gains most on GUI grounding, a task absent from the practice questions. Because the repair lives in the weights, it combines with budget forcing where held-out questions favor it: on the best available weights, Keel has the best average accuracy on both models, significantly above every training-free baseline we compare on the larger one.</div>
         <p class="pub-authors">Jiajun Fan, Neil He, Bangji Yang, <span class="me">Qinglong Zheng</span>, Ziwen Wang, Chaoran Cheng, Changyi Yang, Hanqi Mao, Ge Liu</p>
         <p class="pub-desc">A frontier multimodal agent diagnoses thinking loops in a small vision-language model, edits its weights, and validates the repair on held-out questions, all without gradient training.</p>
         
         <div class="metric">Qwen3.5-0.8B and 2B on six visual reasoning and GUI grounding benchmarks: fewer loops, higher average accuracy, same size and per-token cost</div>
-        
+        <div class="pub-links"><a class="plink" href="https://arxiv.org/abs/2611.25257" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg>arXiv</a></div>
       </div>
     </article>
       <article class="pub" id="pub-hinge" data-area="editing" data-text="hinge: from cross-object spillover to selective state editing hinge under review a benchmark that tests requested object-state changes, their consequences, and the preservation of unaffected facts in synthetic scenes and natural photographs, plus swing editor, which learns object-local state vectors with the vlm frozen. model editing &amp; interpretability chih-ting liao yitong qiao qinglong zheng huqin weng fei shen xin cao tat-seng chua">
@@ -485,6 +486,37 @@
         
       </div>
     </article>
+      <article class="pub" id="pub-upgrade" data-area="editing" data-text="self-upgrading embodied agents self-upgrading agents arxiv 2026 an embodied agent that learns from its own experience by rewriting its own weights between tasks, with no gradient, reward model or second model. it traces wasted steps to one direction in its hidden states, edits one attention layer, and keeps the edit only if it holds against its unchanged self on practice tasks. model editing &amp; interpretability jiajun fan neil he qinglong zheng changyi yang tong wei andy mao zetian li chaoran cheng hui ren ruihan guo xianrui zhong xizheng yu jingyuan li xi zhu kaiqu liang chang xu zun qian zidi xiong yuezhu zhao xu huang ge liu">
+      <div class="pub-thumb" aria-hidden="true"><svg class="pub-art il" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Self-Upgrading Agents">
+    <ellipse class="a" cx="128" cy="86" rx="126" ry="56"/><ellipse class="b" cx="316" cy="62" rx="78" ry="46"/>
+    <text class="lbl" x="52" y="32">HOW WELL IT WORKS</text>
+    <path class="ln-dim" d="M44 22v100h316"/>
+    <path class="ln-dim dash" d="M190 80V62"/>
+    <circle class="node-dim" cx="190" cy="54" r="8"/><path class="ln-dim" d="M186 50l8 8M194 50l-8 8"/>
+    <path class="ln" d="M52 104H112V82H190H268V60H352"/>
+    <circle class="hot" cx="112" cy="93" r="9"/><path class="tick" d="M107 94l3.5 3.5 6.5-7.5"/>
+    <circle class="hot" cx="268" cy="71" r="9"/><path class="tick" d="M263 72l3.5 3.5 6.5-7.5"/>
+    <path class="ln-dim" d="M112 122v5M190 122v5M268 122v5"/>
+    <text class="lbl" x="112" y="139" text-anchor="middle">KEPT</text>
+    <text class="lbl" x="190" y="139" text-anchor="middle">WITHDRAWN</text>
+    <text class="lbl" x="268" y="139" text-anchor="middle">KEPT</text></svg></div>
+      <div class="pub-body">
+        <div class="pub-meta"><span class="badge k-preprint">arXiv 2026</span></div>
+        <h4 class="pub-title"><span class="pub-n">13</span><a href="https://arxiv.org/abs/2611.31117" target="_blank" rel="noopener">Self-Upgrading Embodied Agents</a></h4>
+        <button class="abs-btn" type="button" aria-expanded="false" aria-controls="abs-upgrade">▾ Abstract</button>
+        <div class="pub-abs" id="abs-upgrade" hidden>An embodied agent built on a language model goes to work with the weights it was given and keeps them for life. To get better, it needs more training, or reflection, memory, search or prompts that cost every step and are lost when the task changes. Editing weights by reasoning, weight-space programming, could end this, but has stayed with models that only reason or relied on a far larger commercial model. We introduce the self-upgrading embodied agent, to our knowledge the first that learns from its own experience by upgrading its own weights on the job, between its tasks, with no training, no gradient, no reward model, no second model, no test-time scaling and no harness or prompt engineering. By day a 27B agent works in a household environment. At night it reads its record, finds many of its steps wasted on replies that reach the token limit before any action, traces the habit to one direction in its hidden states, and rewrites one tensor of its weights. An agent that rewrites itself must first never break itself, so it is its own examiner: it tests every change against its unchanged self on practice tasks and keeps only what holds. When an edit holds, the next day it is a better agent, at the same cost per step: over thousands of held-out episodes, 48 fresh seeds a task, its one kept edit makes it complete significantly more tasks, in fewer steps, with fewer wasted and fewer tokens. This self-improvement is multi-round, stable and continual: through the nights that follow, the upgrade holds, without collapse. Of four sizes of its family, only the 27B agent does this. From here on, an embodied agent need not keep training and inference apart: as it works, it gathers its own experience and upgrades itself, with no separate pre-training or post-training and no human intervention. We believe this opens lifelong continual learning for robots: stable, continual, recursive self-improvement.</div>
+        <p class="pub-authors">Jiajun Fan, Neil He, <span class="me">Qinglong Zheng</span>, Changyi Yang, Tong Wei, Andy Mao, Zetian Li, Chaoran Cheng, Hui Ren, Ruihan Guo, Xianrui Zhong, Xizheng Yu, Jingyuan Li, Xi Zhu, Kaiqu Liang, Chang Xu, Zun Qian, Zidi Xiong, Yuezhu Zhao, Xu Huang, Ge Liu</p>
+        <p class="pub-desc">An embodied agent that learns from its own experience by rewriting its own weights between tasks, with no gradient, reward model or second model. It traces wasted steps to one direction in its hidden states, edits one attention layer, and keeps the edit only if it holds against its unchanged self on practice tasks.</p>
+        
+        <div class="metric">Qwen3.5-27B on held-out ALFWorld tasks: completion 41.6% → 45.2%, steps without an action 45.9% → 39.5%</div>
+        <div class="pub-links"><a class="plink" href="https://arxiv.org/abs/2611.31117" target="_blank" rel="noopener"><svg class="ico " aria-hidden="true"><use href="#i-doc"/></svg>arXiv</a><button class="plink js-bib" type="button" data-bib="@article{fan2026selfupgrading,
+  title   = {Self-Upgrading Embodied Agents},
+  author  = {Jiajun Fan and Neil He and Qinglong Zheng and Changyi Yang and Tong Wei and Andy Mao and Zetian Li and Chaoran Cheng and Hui Ren and Ruihan Guo and Xianrui Zhong and Xizheng Yu and Jingyuan Li and Xi Zhu and Kaiqu Liang and Chang Xu and Zun Qian and Zidi Xiong and Yuezhu Zhao and Xu Huang and Ge Liu},
+  journal = {arXiv preprint arXiv:2611.31117},
+  year    = {2026}
+}"><svg class="ico " aria-hidden="true"><use href="#i-braces"/></svg><span>BibTeX</span></button></div>
+      </div>
+    </article>
     </div>
     <p class="pub-empty" id="pub-empty" hidden>No publications match.</p>
   </div>
@@ -498,8 +530,8 @@
     <div>
       <h3>Education</h3>
       <ul class="edu">
-        <li><b>University of Illinois Urbana-Champaign</b><span class="deg">Master's degree in Computer Science</span><span class="when">Sep 2024 – Dec 2025</span></li>
-        <li><b>Pennsylvania State University</b><span class="deg">Bachelor's degree in Computer Science</span><span class="when">Aug 2020 – May 2024</span><span class="note">Minors in Mathematics and Statistics. Dean's List.</span></li>
+        <li><b>University of Illinois Urbana-Champaign</b><span class="deg">Master's degree in Computer Science</span><span class="when">2024 – 2025</span></li>
+        <li><b>Pennsylvania State University</b><span class="deg">Bachelor's degree in Computer Science</span><span class="when">2020 – 2024</span><span class="note">Minors in Mathematics and Statistics. Dean's List.</span></li>
       </ul>
     </div>
     <div>
@@ -540,7 +572,7 @@
   </div>
 </div>
 <div class="tip" id="tip" role="status" aria-live="polite"></div>
-<script type="application/json" id="cmdk-data">[{"t":"News","k":"Section","h":"#news"},{"t":"Featured","k":"Section","h":"#featured"},{"t":"Publications","k":"Section","h":"#publications"},{"t":"Education & Service","k":"Section","h":"#background"},{"t":"Contact","k":"Section","h":"#contact"},{"t":"Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models","s":"ProcedureRL Reward Design for Reinforcement Learning","k":"ProcedureRL","h":"#pub-parl"},{"t":"A General Decision Model Is a General Process Reward Model: Zero-Shot Step Credit for RL Post-Training of LLM Agents","s":"DM-PRM Reward Design for Reinforcement Learning","k":"DM-PRM","h":"#pub-dmprm"},{"t":"STaR-VL: Capability-Aligned Reinforcement Learning for Visual-Temporal Memory","s":"STaR-VL Reward Design for Reinforcement Learning","k":"STaR-VL","h":"#pub-starvl"},{"t":"When to Ask, When to Act: Persona-Conditioned Clarification for Multi-Turn Human-LLM Collaboration","s":"TactfulLLM Reward Design for Reinforcement Learning","k":"TactfulLLM","h":"#pub-tactful"},{"t":"SKT: Self-Evolving Agent Skill Library with Plan-Driven Test-Time Self-Correction","s":"SKT Training-Free Improvement at Test Time","k":"SKT","h":"#pub-skt"},{"t":"Where Do Loops Help? Reallocating Test-Time Compute in Looped Diffusion Transformers","s":"LoopScout Training-Free Improvement at Test Time","k":"LoopScout","h":"#pub-loopscout"},{"t":"Retrieval is Cheap, Show Me the Code: Executable Multi-Hop Reasoning for Retrieval-Augmented Generation","s":"PyRAG Training-Free Improvement at Test Time","k":"PyRAG","h":"#pub-pyrag"},{"t":"How Much Can Language Models Gain from Test-Time Computation?","s":"SELF-POT Training-Free Improvement at Test Time","k":"SELF-POT","h":"#pub-selfpot"},{"t":"Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models","s":"Keystone Training-Free Improvement at Test Time","k":"Keystone","h":"#pub-keystone"},{"t":"What Drives the Prediction? How Neural Models Rely on Physical Information","s":"MII Model Editing & Interpretability","k":"MII","h":"#pub-mii"},{"t":"Keel: A Frontier Model Teaches a Vision-Language Model by Rewriting Its Weights","s":"Keel Model Editing & Interpretability","k":"Keel","h":"#pub-keel"},{"t":"HINGE: From Cross-Object Spillover to Selective State Editing","s":"HINGE Model Editing & Interpretability","k":"HINGE","h":"#pub-hinge"},{"t":"CV","k":"Link","h":"assets/Qinglong_Zheng_CV.pdf"},{"t":"GitHub","k":"Link","h":"https://github.com/RayquazaX"},{"t":"OpenReview","k":"Link","h":"https://openreview.net/profile?id=~Qinglong_Zheng1"},{"t":"ORCID","k":"Link","h":"https://orcid.org/0009-0001-8882-6952"},{"t":"Email me","k":"Link","h":"mailto"},{"t":"Toggle light / dark theme","k":"Action","h":"theme"}]</script>
+<script type="application/json" id="cmdk-data">[{"t":"News","k":"Section","h":"#news"},{"t":"Featured","k":"Section","h":"#featured"},{"t":"Publications","k":"Section","h":"#publications"},{"t":"Education & Service","k":"Section","h":"#background"},{"t":"Contact","k":"Section","h":"#contact"},{"t":"Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models","s":"ProcedureRL Reward Design for Reinforcement Learning","k":"ProcedureRL","h":"#pub-parl"},{"t":"A General Decision Model Is a General Process Reward Model: Zero-Shot Step Credit for RL Post-Training of LLM Agents","s":"DM-PRM Reward Design for Reinforcement Learning","k":"DM-PRM","h":"#pub-dmprm"},{"t":"STaR-VL: Capability-Aligned Reinforcement Learning for Visual-Temporal Memory","s":"STaR-VL Reward Design for Reinforcement Learning","k":"STaR-VL","h":"#pub-starvl"},{"t":"When to Ask, When to Act: Persona-Conditioned Clarification for Multi-Turn Human-LLM Collaboration","s":"TactfulLLM Reward Design for Reinforcement Learning","k":"TactfulLLM","h":"#pub-tactful"},{"t":"SKT: Self-Evolving Agent Skill Library with Plan-Driven Test-Time Self-Correction","s":"SKT Training-Free Improvement at Test Time","k":"SKT","h":"#pub-skt"},{"t":"Where Do Loops Help? Reallocating Test-Time Compute in Looped Diffusion Transformers","s":"LoopScout Training-Free Improvement at Test Time","k":"LoopScout","h":"#pub-loopscout"},{"t":"Retrieval is Cheap, Show Me the Code: Executable Multi-Hop Reasoning for Retrieval-Augmented Generation","s":"PyRAG Training-Free Improvement at Test Time","k":"PyRAG","h":"#pub-pyrag"},{"t":"How Much Can Language Models Gain from Test-Time Computation?","s":"SELF-POT Training-Free Improvement at Test Time","k":"SELF-POT","h":"#pub-selfpot"},{"t":"Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models","s":"Keystone Training-Free Improvement at Test Time","k":"Keystone","h":"#pub-keystone"},{"t":"What Drives the Prediction? How Neural Models Rely on Physical Information","s":"MII Model Editing & Interpretability","k":"MII","h":"#pub-mii"},{"t":"Keel: A Frontier Model Teaches a Vision-Language Model by Rewriting Its Weights","s":"Keel Model Editing & Interpretability","k":"Keel","h":"#pub-keel"},{"t":"HINGE: From Cross-Object Spillover to Selective State Editing","s":"HINGE Model Editing & Interpretability","k":"HINGE","h":"#pub-hinge"},{"t":"Self-Upgrading Embodied Agents","s":"Self-Upgrading Agents Model Editing & Interpretability","k":"Self-Upgrading Agents","h":"#pub-upgrade"},{"t":"CV","k":"Link","h":"assets/Qinglong_Zheng_CV.pdf"},{"t":"GitHub","k":"Link","h":"https://github.com/RayquazaX"},{"t":"OpenReview","k":"Link","h":"https://openreview.net/profile?id=~Qinglong_Zheng1"},{"t":"ORCID","k":"Link","h":"https://orcid.org/0009-0001-8882-6952"},{"t":"Email me","k":"Link","h":"mailto"},{"t":"Toggle light / dark theme","k":"Action","h":"theme"}]</script>
 <script src="assets/js/site.js" defer></script>
 </body>
 </html>
